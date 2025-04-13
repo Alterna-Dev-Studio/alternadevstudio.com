@@ -4,6 +4,14 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "build": "pnpm exec eleventy",
+    "build-nocolor": "cross-env NODE_DISABLE_COLORS=1 pnpm exec eleventy",
+    "build-ghpages": "pnpm exec eleventy --pathprefix=/eleventy-base-blog/",
+    "start": "pnpm exec eleventy --serve --quiet",
+    "start-ghpages": "pnpm exec eleventy --pathprefix=/eleventy-base-blog/ --serve --quiet",
+    "debug": "cross-env DEBUG=Eleventy* pnpm exec eleventy",
+    "debugstart": "cross-env DEBUG=Eleventy* pnpm exec eleventy --serve --quiet",
+    "benchmark": "cross-env DEBUG=Eleventy:Benchmark* pnpm exec eleventy",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -11,6 +19,7 @@
   "license": "ISC",
   "packageManager": "pnpm@10.8.0",
   "dependencies": {
-    "@11ty/eleventy": "^3.0.0"
+    "@11ty/eleventy": "^3.0.0",
+    "cross-env": "^7.0.3"
   }
 }
