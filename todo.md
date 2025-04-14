@@ -93,9 +93,9 @@ Below is a **detailed, actionable** checklist with micro-level tasks for each ph
   - [x] `<footer>` with social icons & Plausible script.
 
 ### 3.2 Responsive Styling
-- [ ] Either set up Tailwind or custom CSS.
+- [x] Either set up Tailwind or custom CSS.
 - [ ] Confirm `<header>` and `<footer>` scale properly on mobile vs. desktop.
-- [ ] Add basic resets or global styling if needed.
+- [x] Add basic resets or global styling if needed.
 
 ### 3.3 Test Layout
 - [ ] Create test page (e.g., `layout-test.njk`) that extends `base.njk`.

@@ -45,7 +45,14 @@ Based on the todo.md file, the following tasks are next in the pipeline:
 
 ### Styling Approach
 
-A decision needs to be made on whether to use Tailwind CSS or a custom CSS approach for styling. The todo.md file mentions "Either set up Tailwind or custom CSS."
+We have implemented Tailwind CSS for styling the site. The setup includes:
+
+- Tailwind CSS v4.1.4 with PostCSS for processing
+- Custom color palette defined in tailwind.config.js (primary, secondary, accent, highlight)
+- CSS variables for custom colors in src/_assets/css/main.css
+- Responsive design patterns using Tailwind's utility classes
+
+The implementation follows a utility-first approach, with custom CSS added only when necessary. The custom color palette is based on the design style guidelines from the product context document.
 
 ### Content Rendering
 

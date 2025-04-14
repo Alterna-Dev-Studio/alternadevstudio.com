@@ -8,7 +8,8 @@ AlternaDevStudio.com uses a modern JAMstack architecture with the following core
 
 - **Static Site Generator**: [11ty (Eleventy)](https://www.11ty.dev/) v3.0.0
 - **Templating Engine**: [Nunjucks](https://mozilla.github.io/nunjucks/) v3.2.4
-- **CSS**: Custom CSS (no framework currently implemented)
+- **CSS Framework**: [Tailwind CSS](https://tailwindcss.com/) v4.1.4
+- **CSS Processing**: [PostCSS](https://postcss.org/) v8.5.3 with [Autoprefixer](https://github.com/postcss/autoprefixer) v10.4.21
 
 ### Content Management
 

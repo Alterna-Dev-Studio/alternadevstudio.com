@@ -1,8 +1,19 @@
+import { execSync } from "child_process";
+import directoryOutput from "@11ty/eleventy-plugin-directory-output";
+
 /**
  * @param {import("@11ty/eleventy").UserConfig} eleventyConfig
  * @returns {ReturnType<import("@11ty/eleventy").configFunction>}
  */
 export default function(eleventyConfig) {
+  // Add the directory output plugin
+  eleventyConfig.addPlugin(directoryOutput);
+  
+  // Process CSS with PostCSS
+  eleventyConfig.on("eleventy.before", async () => {
+    console.log("Processing CSS with PostCSS...");
+    execSync("npx postcss src/_assets/css/main.css -o _site/css/main.css");
+  });
   // Set Nunjucks as the default template engine for HTML and Nunjucks files
   eleventyConfig.setTemplateFormats(["html", "njk", "md"]);
   
@@ -60,9 +71,12 @@ export default function(eleventyConfig) {
   
   // Explicitly set the files to process
   eleventyConfig.setServerOptions({
-    // Only watch the src directory for changes
-    watch: ["src/**/*"]
+    // Watch the src directory and CSS files for changes
+    watch: ["src/**/*", "src/_assets/css/**/*.css"]
   });
+  
+  // Add passthrough copy for assets
+  eleventyConfig.addPassthroughCopy("src/_assets");
 
   return {
     // Directory structure
