@@ -18,7 +18,7 @@ Below is an updated plan explicitly referencing **Nunjucks** for templating with
      ```bash
      pnpm install nunjucks
      ```  
-   - Create a minimal `.eleventy.js` config, specifying Nunjucks as the default template engine for pages and data files if desired.
+   - Create a minimal `eleventy.config.js` config, using ESM and specifying Nunjucks as the default template engine for pages and data files if desired.
 
 3. **Basic “Hello World”**  
    - Create a `src` directory (or `_pages`, whichever you prefer).  
