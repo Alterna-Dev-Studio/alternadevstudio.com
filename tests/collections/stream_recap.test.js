@@ -14,6 +14,8 @@ import { streamRecap } from '../../src/directus/collections/index.js';
 
 describe('stream_recap Collection', () => {
   let client;
+  let token;
+  const { url } = getDirectusConfig();
   
   beforeAll(async () => {
     // Create Directus client
@@ -22,6 +24,9 @@ describe('stream_recap Collection', () => {
     // Login to Directus
     const loggedIn = await loginToDirectus(client);
     expect(loggedIn).toBe(true);
+    
+    // Get token for API calls
+    token = client.getToken();
   });
   
   test('Collection exists and is accessible', async () => {
@@ -33,10 +38,9 @@ describe('stream_recap Collection', () => {
       expect(Array.isArray(items)).toBe(true);
       
       // Get the total count using the API directly
-      const { url } = getDirectusConfig();
       const response = await fetch(`${url}/items/stream_recap?limit=1`, {
         headers: {
-          'Authorization': `Bearer ${client.getToken()}`
+          'Authorization': `Bearer ${token}`
         }
       });
       
@@ -56,16 +60,53 @@ describe('stream_recap Collection', () => {
     }
   });
   
-  test('Collection has the expected structure', async () => {
-    // Get the expected fields from the collection definition
-    const expectedFields = streamRecap.fields.map(field => field.field);
+  describe('Field structure', () => {
+    let fields;
     
-    // Log the expected fields
-    console.log('Collection stream_recap exists and is accessible');
-    console.log('Expected fields:', expectedFields.join(', '));
+    beforeAll(async () => {
+      // Get the expected fields from the collection definition
+      fields = streamRecap.fields.map(field => ({
+        field: field.field,
+        type: field.type
+      }));
+      
+      // Log the expected fields
+      console.log('Expected fields:', fields.map(f => f.field).join(', '));
+    });
     
-    // We could add more detailed tests here to verify the field structure
-    // by fetching the collection schema from Directus, but that would require
-    // admin permissions
+    test('has title field (string)', () => {
+      const field = fields.find(f => f.field === 'title');
+      expect(field).toBeDefined();
+      expect(field.type).toBe('string');
+    });
+    
+    test('has stream_date field (timestamp)', () => {
+      const field = fields.find(f => f.field === 'stream_date');
+      expect(field).toBeDefined();
+      expect(['timestamp', 'datetime'].includes(field.type)).toBe(true);
+    });
+    
+    test('has video_url field (string)', () => {
+      const field = fields.find(f => f.field === 'video_url');
+      expect(field).toBeDefined();
+      expect(field.type).toBe('string');
+    });
+    
+    test('has summary field (text)', () => {
+      const field = fields.find(f => f.field === 'summary');
+      expect(field).toBeDefined();
+      expect(['text', 'string'].includes(field.type)).toBe(true);
+    });
+    
+    test('has all expected fields', () => {
+      // Get the expected fields from the collection definition
+      const expectedFields = streamRecap.fields.map(field => field.field);
+      
+      // Check that all expected fields are present
+      for (const fieldName of expectedFields) {
+        const field = fields.find(f => f.field === fieldName);
+        expect(field).toBeDefined();
+      }
+    });
   });
 });

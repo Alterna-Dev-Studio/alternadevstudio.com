@@ -14,6 +14,8 @@ import { blogPosts } from '../../src/directus/collections/index.js';
 
 describe('blog_posts Collection', () => {
   let client;
+  let token;
+  const { url } = getDirectusConfig();
   
   beforeAll(async () => {
     // Create Directus client
@@ -22,6 +24,9 @@ describe('blog_posts Collection', () => {
     // Login to Directus
     const loggedIn = await loginToDirectus(client);
     expect(loggedIn).toBe(true);
+    
+    // Get token for API calls
+    token = client.getToken();
   });
   
   test('Collection exists and is accessible', async () => {
@@ -33,10 +38,9 @@ describe('blog_posts Collection', () => {
       expect(Array.isArray(items)).toBe(true);
       
       // Get the total count using the API directly
-      const { url } = getDirectusConfig();
       const response = await fetch(`${url}/items/blog_posts?limit=1`, {
         headers: {
-          'Authorization': `Bearer ${client.getToken()}`
+          'Authorization': `Bearer ${token}`
         }
       });
       
@@ -56,16 +60,65 @@ describe('blog_posts Collection', () => {
     }
   });
   
-  test('Collection has the expected structure', async () => {
-    // Get the expected fields from the collection definition
-    const expectedFields = blogPosts.fields.map(field => field.field);
+  describe('Field structure', () => {
+    let fields;
     
-    // Log the expected fields
-    console.log('Collection blog_posts exists and is accessible');
-    console.log('Expected fields:', expectedFields.join(', '));
+    beforeAll(async () => {
+      // Get the expected fields from the collection definition
+      fields = blogPosts.fields.map(field => ({
+        field: field.field,
+        type: field.type
+      }));
+      
+      // Log the expected fields
+      console.log('Expected fields:', fields.map(f => f.field).join(', '));
+    });
     
-    // We could add more detailed tests here to verify the field structure
-    // by fetching the collection schema from Directus, but that would require
-    // admin permissions
+    test('has title field (string)', () => {
+      const field = fields.find(f => f.field === 'title');
+      expect(field).toBeDefined();
+      expect(field.type).toBe('string');
+    });
+    
+    test('has date_published field (timestamp)', () => {
+      const field = fields.find(f => f.field === 'date_published');
+      expect(field).toBeDefined();
+      expect(['timestamp', 'datetime'].includes(field.type)).toBe(true);
+    });
+    
+    test('has author field (string)', () => {
+      const field = fields.find(f => f.field === 'author');
+      expect(field).toBeDefined();
+      expect(field.type).toBe('string');
+    });
+    
+    test('has content field (text/rich)', () => {
+      const field = fields.find(f => f.field === 'content');
+      expect(field).toBeDefined();
+      expect(['text', 'json'].includes(field.type)).toBe(true);
+    });
+    
+    test('has tags field (json or multiple select)', () => {
+      const field = fields.find(f => f.field === 'tags');
+      expect(field).toBeDefined();
+      expect(['json', 'csv', 'array'].includes(field.type)).toBe(true);
+    });
+    
+    test('has featured_image field (file relationship optional)', () => {
+      const field = fields.find(f => f.field === 'featured_image');
+      expect(field).toBeDefined();
+      expect(['uuid', 'file', 'integer'].includes(field.type)).toBe(true);
+    });
+    
+    test('has all expected fields', () => {
+      // Get the expected fields from the collection definition
+      const expectedFields = blogPosts.fields.map(field => field.field);
+      
+      // Check that all expected fields are present
+      for (const fieldName of expectedFields) {
+        const field = fields.find(f => f.field === fieldName);
+        expect(field).toBeDefined();
+      }
+    });
   });
 });
