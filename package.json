@@ -14,7 +14,8 @@
     "debug": "cross-env DEBUG=Eleventy* pnpm exec eleventy",
     "debugstart": "cross-env DEBUG=Eleventy* pnpm exec eleventy --serve --quiet",
     "benchmark": "cross-env DEBUG=Eleventy:Benchmark* pnpm exec eleventy",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js --detectOpenHandles",
+    "test:watch": "node --experimental-vm-modules node_modules/jest/bin/jest.js --watch --detectOpenHandles",
     "setup": "./setup-dev.sh",
     "directus:setup": "cd tools/directus && ./setup-dev-environment.sh",
     "directus:start": "cd tools/directus && docker-compose up -d",
@@ -32,5 +33,10 @@
     "cross-env": "^7.0.3",
     "dotenv": "^16.3.1",
     "nunjucks": "^3.2.4"
+  },
+  "devDependencies": {
+    "@babel/preset-env": "^7.26.9",
+    "jest": "^29.7.0",
+    "jest-environment-node": "^29.7.0"
   }
 }
