@@ -46,26 +46,26 @@ Below is a **detailed, actionable** checklist with micro-level tasks for each ph
   1. `blog_posts`
   2. `projects`
   3. `stream_recap`
-- [ ] Define fields for blog_posts:
-  - [ ] title (string)
-  - [ ] date (datetime)
-  - [ ] author (string)
-  - [ ] body (text/rich)
-  - [ ] tags (json or multiple select)
-  - [ ] image (file relationship optional)
-- [ ] Define fields for projects:
-  - [ ] name (string)
-  - [ ] status (enum: 'launched', 'in development')
-  - [ ] description (text)
-  - [ ] technologies (json or multiple select)
-  - [ ] problem_solved (text)
-  - [ ] outcomes_results (text)
-  - [ ] image (file optional)
-- [ ] Define fields for stream_recap:
-  - [ ] title (string)
-  - [ ] date (datetime)
-  - [ ] youtube_link (string)
-  - [ ] description (text)
+- [x] Define fields for blog_posts:
+  - [x] title (string)
+  - [x] date (datetime)
+  - [x] author (string)
+  - [x] body (text/rich)
+  - [x] tags (json or multiple select)
+  - [x] image (file relationship optional)
+- [x] Define fields for projects:
+  - [x] name (string)
+  - [x] status (enum: 'launched', 'in development')
+  - [x] description (text)
+  - [x] technologies (json or multiple select)
+  - [x] problem_solved (text)
+  - [x] outcomes_results (text)
+  - [x] image (file optional)
+- [x] Define fields for stream_recap:
+  - [x] title (string)
+  - [x] date (datetime)
+  - [x] youtube_link (string)
+  - [x] description (text)
 
 ### 2.2 API Token
 - [x] Generate read-only or read/write token in Directus.
