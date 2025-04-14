@@ -13,6 +13,9 @@ This directory contains a testing framework for Directus that can:
 - `utils/directus.js`: Utility functions for interacting with Directus
 - `directus-connection.test.js`: Test that verifies Directus is running and accessible using the SDK
 - `directus-sdk.test.js`: Test that verifies Directus is running and accessible using the SDK with more detailed output (migrated from `tools/directus/test-connection.js`)
+- `collections/blog_posts.test.js`: Test that verifies the blog_posts collection exists and has the required fields
+- `collections/projects.test.js`: Test that verifies the projects collection exists and has the required fields
+- `collections/stream_recap.test.js`: Test that verifies the stream_recap collection exists and has the required fields
 
 ## How to Use
 

@@ -11,22 +11,22 @@ Below is a **detailed, actionable** checklist with micro-level tasks for each ph
 - [x] Clone repository locally.
 - [x] Add `.gitignore` (ignore `node_modules`, `.DS_Store`, etc.).
 - [x] Create `package.json`:
-  - [ ] for package management, use pnpm
+- [x] for package management, use pnpm
   - [x] Scripts: `"build": "eleventy"`, `"start": "eleventy --serve"`.
   - [x] Include dev dependencies: `@11ty/eleventy`.
-  - [ ] Include dev dependencies: `nunjucks`.
-- [ ] Run `pnpm install` to install dependencies.
+- [x] Include dev dependencies: `nunjucks`.
+- [x] Run `pnpm install` to install dependencies.
 
 ### 1.2 Configure Eleventy with Nunjucks
-- [ ] Create `eleventy.config.js` in root. (https://www.11ty.dev/docs/config/)
-  - [ ] Use ESM instead of CommonJS for modules.
-  - [ ] Set input folder to `src`, output folder to `_site`.
-  - [ ] Configure `markdownTemplateEngine`, `htmlTemplateEngine`, and `dataTemplateEngine` to `njk`.
-- [ ] Create `src` folder.
-  - [ ] Add `index.njk` with a simple "Hello World" message.
-- [ ] Test locally:
-  - [ ] `pnpm build` (builds to `_site`).
-  - [ ] `pnpm start` (serves `_site`).
+- [x] Create `eleventy.config.js` in root. (https://www.11ty.dev/docs/config/)
+  - [x] Use ESM instead of CommonJS for modules.
+  - [x] Set input folder to `src`, output folder to `_site`.
+  - [x] Configure `markdownTemplateEngine`, `htmlTemplateEngine`, and `dataTemplateEngine` to `njk`.
+- [x] Create `src` folder.
+  - [x] Add `index.njk` with a simple "Hello World" message.
+- [x] Test locally:
+  - [x] `pnpm build` (builds to `_site`).
+  - [x] `pnpm start` (serves `_site`).
 
 ### 1.3 GitHub Pages Deployment
 - [x] Create `.github/workflows/deploy.yml`.
@@ -41,40 +41,56 @@ Below is a **detailed, actionable** checklist with micro-level tasks for each ph
 ## 2. **Directus CMS Integration**
 
 ### 2.1 Directus Setup
-- [ ] Deploy or configure existing Directus instance.
-- [ ] Create necessary collections:
+- [x] Deploy or configure existing Directus instance.
+- [x] Create necessary collections:
   1. `blog_posts`
   2. `projects`
   3. `stream_recap`
-- [ ] Define fields:
-  - **blog_posts**: title (string), date (datetime), author (string), body (text/rich), tags (json or multiple select), image (file relationship optional)
-  - **projects**: name (string), status (enum: 'launched', 'in development'), description (text), technologies (json or multiple select), problem_solved (text), outcomes_results (text), image (file optional)
-  - **stream_recap**: title (string), date (datetime), youtube_link (string), description (text)
+- [ ] Define fields for blog_posts:
+  - [ ] title (string)
+  - [ ] date (datetime)
+  - [ ] author (string)
+  - [ ] body (text/rich)
+  - [ ] tags (json or multiple select)
+  - [ ] image (file relationship optional)
+- [ ] Define fields for projects:
+  - [ ] name (string)
+  - [ ] status (enum: 'launched', 'in development')
+  - [ ] description (text)
+  - [ ] technologies (json or multiple select)
+  - [ ] problem_solved (text)
+  - [ ] outcomes_results (text)
+  - [ ] image (file optional)
+- [ ] Define fields for stream_recap:
+  - [ ] title (string)
+  - [ ] date (datetime)
+  - [ ] youtube_link (string)
+  - [ ] description (text)
 
 ### 2.2 API Token
-- [ ] Generate read-only or read/write token in Directus.
-- [ ] Store token in `.env` (never commit `.env` to version control).
+- [x] Generate read-only or read/write token in Directus.
+- [x] Store token in `.env` (never commit `.env` to version control).
 
 ### 2.3 Fetch Data in 11ty
-- [ ] Create `_data/directus.js`:
-  - [ ] Read token from `.env`.
-  - [ ] Fetch collections (`blog_posts`, `projects`, `stream_recap`).
-  - [ ] Export an object: `{ blogPosts, projects, streamRecap }`.
-- [ ] Implement error handling (try-catch, fallback to empty arrays).
-- [ ] Test data fetching:
-  - [ ] Possibly write a Jest test that mocks fetch calls.
-  - [ ] Confirm returned data matches expected shapes.
+- [x] Create `_data/directus.js`:
+  - [x] Read token from `.env`.
+  - [x] Fetch collections (`blog_posts`, `projects`, `stream_recap`).
+  - [x] Export an object: `{ blogPosts, projects, streamRecap }`.
+- [x] Implement error handling (try-catch, fallback to empty arrays).
+- [x] Test data fetching:
+  - [x] Implemented Jest tests for Directus connection and SDK.
+  - [x] Confirm returned data matches expected shapes.
 
 ---
 
 ## 3. **Global Layout & Navigation**
 
 ### 3.1 Base Layout
-- [ ] Create `src/_includes/layouts/base.njk`:
-  - [ ] HTML `<head>` with meta tags, link to CSS.
-  - [ ] `<header>` for site title/logo.
-  - [ ] `<nav>` with links to Home, About, Projects, Blog, Live Product Dev, Contact.
-  - [ ] `<footer>` with social icons & Plausible script.
+- [x] Create `src/_includes/layouts/base.njk`:
+  - [x] HTML `<head>` with meta tags, link to CSS.
+  - [x] `<header>` for site title/logo.
+  - [x] `<nav>` with links to Home, About, Projects, Blog, Live Product Dev, Contact.
+  - [x] `<footer>` with social icons & Plausible script.
 
 ### 3.2 Responsive Styling
 - [ ] Either set up Tailwind or custom CSS.
@@ -117,8 +133,8 @@ Below is a **detailed, actionable** checklist with micro-level tasks for each ph
 ## 5. **About Page**
 
 ### 5.1 Nunjucks Template
-- [ ] Create `src/about.njk` that extends `base.njk`.
-- [ ] Add inspirational copy about mission and how the studio works.
+- [x] Create `src/about.njk` that extends `base.njk`.
+- [x] Add inspirational copy about mission and how the studio works.
 
 ### 5.2 Optional CMS Integration
 - [ ] If you want dynamic content, create a Directus collection (e.g., `about_content`).
@@ -252,10 +268,32 @@ Below is a **detailed, actionable** checklist with micro-level tasks for each ph
 
 ---
 
+## 12. **Testing Infrastructure**
+
+### 12.1 Jest Setup
+- [x] Configure Jest for testing.
+- [x] Create test setup and teardown scripts.
+- [x] Implement utility functions for testing.
+
+### 12.2 Directus Testing
+- [x] Migrate shell script tests to Jest.
+- [x] Create SDK-based tests for Directus connection.
+- [x] Test collection existence and accessibility.
+- [x] Implement error handling in tests.
+- [x] Test field existence for each collection:
+  - [x] Test blog_posts fields (title, date, author, body, tags, image)
+  - [x] Test projects fields (name, status, description, technologies, problem_solved, outcomes_results, image)
+  - [x] Test stream_recap fields (title, date, youtube_link, description)
+- [x] Reorganize tests to be centered around each collection
+
+### 12.3 Future Test Improvements
+- [ ] Add tests for data fetching in Eleventy.
+- [ ] Implement component testing for UI elements.
+- [ ] Add end-to-end tests for critical user flows.
+
 ## Notes & Best Practices
 - Use TDD or incremental testing for each feature.
 - Keep commits atomic (one feature/fix per commit).
 - Expand or refine tasks as needed.
 
 **End of `todo.md`**
-
