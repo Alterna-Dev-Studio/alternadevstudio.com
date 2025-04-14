@@ -118,7 +118,7 @@ ADMIN_PASSWORD=$(grep ADMIN_PASSWORD .env | cut -d '=' -f2)
 # Run the setup-collections script from the shared module
 echo "Running collection setup script..."
 cd ../../
-pnpm exec node src/directus/setup-collections.js
+pnpm run directus:setup-collections
 cd tools/directus
 
 echo ""
