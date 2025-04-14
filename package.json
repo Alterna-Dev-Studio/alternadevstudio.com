@@ -16,14 +16,12 @@
     "benchmark": "cross-env DEBUG=Eleventy:Benchmark* pnpm exec eleventy",
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js --detectOpenHandles",
     "test:watch": "node --experimental-vm-modules node_modules/jest/bin/jest.js --watch --detectOpenHandles",
+    "test:directus": "pnpm test -- -t 'Directus'",
     "setup": "./setup-dev.sh",
     "directus:setup": "cd tools/directus && ./setup-dev-environment.sh",
     "directus:start": "cd tools/directus && docker-compose up -d",
     "directus:stop": "cd tools/directus && docker-compose down",
-    "directus:test": "pnpm test -- -t 'Directus'",
-    "directus:sample-content": "node tools/directus/create-sample-content.js",
-    "directus:minio-setup": "cd tools/directus && ./configure-minio.sh",
-    "directus:minio-setup-test": "cd tools/directus && ./setup-minio-automated.sh --test"
+    "directus:sample-content": "node tools/directus/create-sample-content.js"
   },
   "keywords": [],
   "author": "",

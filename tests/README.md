@@ -33,6 +33,12 @@ To run tests in watch mode (tests will re-run when files change):
 pnpm test:watch
 ```
 
+To run only Directus-related tests:
+
+```bash
+pnpm test:directus
+```
+
 ### Writing Tests
 
 1. Create a new test file in the `tests` directory with a `.test.js` extension
