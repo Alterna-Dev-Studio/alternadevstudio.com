@@ -38,9 +38,9 @@ Eleventy is a simpler static site generator. It transforms a directory of templa
 ## Quick Start
 
 \`\`\`bash
-npm install -g @11ty/eleventy
+pnpm add -g @11ty/eleventy
 echo '# Hello World' > index.md
-npx @11ty/eleventy
+pnpm exec @11ty/eleventy
 \`\`\`
 
 And just like that, you've built your first Eleventy site!
