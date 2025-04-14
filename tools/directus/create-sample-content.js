@@ -1,5 +1,3 @@
-#!/usr/bin/env node
-
 /**
  * Script to create sample content in Directus
  * 
