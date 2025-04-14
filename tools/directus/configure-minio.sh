@@ -89,7 +89,7 @@ done
 # Set positional arguments in their proper place
 eval set -- "$PARAMS"
 
-# Check for special case when called from npm script with -- --test
+# Check for special case when called from pnpm script with -- --test
 if [[ "$1" == "--" && "$2" == "--test" ]]; then
     TEST_MODE="true"
 fi
