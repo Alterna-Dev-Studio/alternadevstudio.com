@@ -22,6 +22,7 @@ The AlternaDevStudio.com website is currently in the early development phase. Th
 - ✅ Implementation of data fetching from Directus with fallback to sample data
 - ✅ Basic layout and initial pages (Home, About)
 - ✅ Testing infrastructure with Jest
+- ✅ Merged includes into layouts folder to simplify directory structure
 
 ### In Progress
 

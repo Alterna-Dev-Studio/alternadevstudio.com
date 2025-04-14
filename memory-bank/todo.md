@@ -86,7 +86,7 @@ Below is a **detailed, actionable** checklist with micro-level tasks for each ph
 ## 3. **Global Layout & Navigation**
 
 ### 3.1 Base Layout
-- [x] Create `src/_includes/layouts/base.njk`:
+- [x] Create `src/_layouts/base.njk`:
   - [x] HTML `<head>` with meta tags, link to CSS.
   - [x] `<header>` for site title/logo.
   - [x] `<nav>` with links to Home, About, Projects, Blog, Live Product Dev, Contact.

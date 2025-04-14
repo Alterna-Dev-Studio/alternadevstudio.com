@@ -36,7 +36,7 @@ Below is an updated plan explicitly referencing **Nunjucks** for templating with
    - Test by iterating over data in a sample template.
 
 6. **Global Layout & Navigation**  
-   - Create a `layouts` folder (e.g., `src/_includes/layouts`), add a `base.njk` for shared header, footer, and `<main>` structure.  
+   - Create a `layouts` folder (e.g., `src/_layouts`), add a `base.njk` for shared header, footer, and `<main>` structure.
    - Add site-wide nav (Home, About, Projects, Blog, Live Product Dev, Contact).  
    - Include social links in the footer, plus the Plausible script.
 

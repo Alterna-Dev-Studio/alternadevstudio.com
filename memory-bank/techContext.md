@@ -94,7 +94,6 @@ The project follows a standard 11ty structure with some additions for Directus i
 │   │   ├── stream_recaps.js # Fetches stream recaps from Directus
 │   │   └── utils/        # Utility functions
 │   │       └── directus.js # Directus connection utilities
-│   ├── _includes/        # Reusable components
 │   ├── _layouts/         # Layout templates
 │   │   └── base.njk      # Base layout
 │   ├── about.html        # About page

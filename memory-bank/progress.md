@@ -122,7 +122,7 @@ As of April 14, 2025, the project is in the early development phase. The foundat
 - [x] Store token in `.env`.
 - [x] Create `_data/directus.js` for fetching data.
 - [x] Implement error handling with fallback to sample data.
-- [x] Create `src/_includes/layouts/base.njk`.
+- [x] Create `src/_layouts/base.njk`.
 - [x] Configure Jest for testing.
 - [x] Create test setup and teardown scripts.
 - [x] Implement utility functions for testing.
