@@ -4,7 +4,7 @@
  * This file exports the blog posts data from the directus.js file
  */
 
-import directusData from './directus.js';
+import directusData from './utils/directus.js';
 
 export default async function() {
   console.log('Blog posts data file loaded');
