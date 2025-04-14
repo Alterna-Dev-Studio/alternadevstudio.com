@@ -5,9 +5,7 @@
 export default function(eleventyConfig) {
   // Set Nunjucks as the default template engine for HTML files
   eleventyConfig.setTemplateFormats(["html", "njk", "md"]);
-  eleventyConfig.addTemplateFormats("html");
   
-  // Configure Nunjucks as the default engine for HTML files
   eleventyConfig.setLibrary("html", eleventyConfig.nunjucksLibrary);
   
   // Optional: Configure Nunjucks for data files if desired
