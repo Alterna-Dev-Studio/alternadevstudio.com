@@ -5,7 +5,7 @@
  * It creates a sample blog post, project, and stream recap.
  */
 
-import { createDirectus, rest, authentication, createItem } from '@directus/sdk';
+import { createDirectus, rest, authentication, createItem, readItems } from '@directus/sdk';
 import { config } from 'dotenv';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
@@ -28,6 +28,61 @@ if (existsSync(envPath)) {
 const directusUrl = process.env.DIRECTUS_URL || 'http://localhost:8055';
 const email = process.env.DIRECTUS_EMAIL || 'admin@example.com';
 const password = process.env.DIRECTUS_PASSWORD || 'change-me-please';
+
+/**
+ * Check collection schema to ensure it's compatible with our data
+ */
+async function checkCollectionSchema(client, collectionName) {
+  try {
+    console.log(`Checking schema for ${collectionName} collection...`);
+    
+    // Get collection information
+    const schema = await client.request(
+      readItems('directus_collections', {
+        filter: { collection: { _eq: collectionName } }
+      })
+    );
+    
+    if (schema.length === 0) {
+      console.log(`Collection ${collectionName} not found.`);
+      return false;
+    }
+    
+    // Get field information
+    const fields = await client.request(
+      readItems('directus_fields', {
+        filter: { collection: { _eq: collectionName } }
+      })
+    );
+    
+    // Check if id field exists and is properly configured
+    const idField = fields.find(field => field.field === 'id');
+    if (!idField) {
+      console.log(`ID field not found in ${collectionName} collection.`);
+      return false;
+    }
+    
+    console.log(`ID field in ${collectionName}:`, idField);
+    
+    // Check if the ID field is an auto-increment integer
+    if (idField.type !== 'integer' || !idField.schema?.has_auto_increment) {
+      console.log(`Warning: ID field in ${collectionName} is not configured as an auto-increment integer.`);
+      console.log(`Type: ${idField.type}, Auto-increment: ${idField.schema?.has_auto_increment}`);
+      
+      if (idField.meta?.special?.includes('uuid')) {
+        console.log(`Warning: ID field has UUID special attribute but is defined as an integer.`);
+        console.log(`This can cause type conflicts when creating items.`);
+      }
+    } else {
+      console.log(`ID field in ${collectionName} is properly configured as an auto-increment integer.`);
+    }
+    
+    return true;
+  } catch (error) {
+    console.error(`Error checking schema for ${collectionName}:`, error.message);
+    return false;
+  }
+}
 
 /**
  * Create sample content in Directus
@@ -63,16 +118,24 @@ async function createSampleContent() {
     console.log('Login successful!');
     console.log('');
     
+    // Check collection schemas
+    await checkCollectionSchema(client, 'blog_posts');
+    await checkCollectionSchema(client, 'projects');
+    await checkCollectionSchema(client, 'stream_recap');
+    console.log('');
+    
     // Create a sample blog post
-    console.log('Creating a sample blog post...');
-    const blogPost = await client.request(
-      createItem('blog_posts', {
-        status: 'published',
-        title: 'Getting Started with Directus and Eleventy',
-        slug: 'getting-started-with-directus-and-eleventy',
-        date_published: new Date().toISOString(),
-        author: 'AlternaDevStudio',
-        content: `
+    try {
+      console.log('Creating a sample blog post...');
+      const blogPost = await client.request(
+        createItem('blog_posts', {
+          // Don't include ID field, let Directus auto-generate it
+          status: 'published',
+          title: 'Getting Started with Directus and Eleventy',
+          slug: 'getting-started-with-directus-and-eleventy',
+          date_published: new Date().toISOString(),
+          author: 'AlternaDevStudio',
+          content: `
 # Getting Started with Directus and Eleventy
 
 This is a sample blog post created via the API to demonstrate how to integrate Directus with Eleventy.
@@ -102,23 +165,29 @@ To get started with this setup:
 2. Create content in the Directus admin interface
 3. Run \`pnpm start\` to start the Eleventy development server
 4. Your content will be automatically pulled from Directus and displayed on your site
-        `,
-        excerpt: 'Learn how to integrate Directus as a headless CMS with Eleventy for a powerful and flexible website setup.',
-        tags: ['directus', 'eleventy', 'jamstack', 'headless-cms']
-      })
-    );
-    console.log(`Blog post created with ID: ${blogPost.id}`);
-    console.log('');
+          `,
+          excerpt: 'Learn how to integrate Directus as a headless CMS with Eleventy for a powerful and flexible website setup.',
+          tags: ['directus', 'eleventy', 'jamstack', 'headless-cms']
+        })
+      );
+      console.log(`Blog post created with ID: ${blogPost.id}`);
+      console.log('');
+    } catch (error) {
+      console.error('Error creating blog post:', error.message);
+      console.log('');
+    }
     
     // Create a sample project
-    console.log('Creating a sample project...');
-    const project = await client.request(
-      createItem('projects', {
-        status: 'published',
-        title: 'AlternaDevStudio Website',
-        slug: 'alternadevstudio-website',
-        date_completed: new Date().toISOString(),
-        description: `
+    try {
+      console.log('Creating a sample project...');
+      const project = await client.request(
+        createItem('projects', {
+          // Don't include ID field, let Directus auto-generate it
+          status: 'published',
+          title: 'AlternaDevStudio Website',
+          slug: 'alternadevstudio-website',
+          date_completed: new Date().toISOString(),
+          description: `
 # AlternaDevStudio Website
 
 This is the website you're currently viewing! It's built with Eleventy and uses Directus as a headless CMS.
@@ -136,27 +205,33 @@ This is the website you're currently viewing! It's built with Eleventy and uses 
 - Directus as a headless CMS
 - Docker for local development
 - Deployed on Netlify
-        `,
-        short_description: 'The AlternaDevStudio website, built with Eleventy and Directus.',
-        technologies: ['Eleventy', 'Directus', 'JavaScript', 'Docker', 'Netlify'],
-        github_url: 'https://github.com/alternadev/alternadevstudio.com',
-        live_url: 'https://alternadevstudio.com',
-        featured: true,
-        sort_order: 1
-      })
-    );
-    console.log(`Project created with ID: ${project.id}`);
-    console.log('');
+          `,
+          short_description: 'The AlternaDevStudio website, built with Eleventy and Directus.',
+          technologies: ['Eleventy', 'Directus', 'JavaScript', 'Docker', 'Netlify'],
+          github_url: 'https://github.com/alternadev/alternadevstudio.com',
+          live_url: 'https://alternadevstudio.com',
+          featured: true,
+          sort_order: 1
+        })
+      );
+      console.log(`Project created with ID: ${project.id}`);
+      console.log('');
+    } catch (error) {
+      console.error('Error creating project:', error.message);
+      console.log('');
+    }
     
     // Create a sample stream recap
-    console.log('Creating a sample stream recap...');
-    const streamRecap = await client.request(
-      createItem('stream_recap', {
-        status: 'published',
-        title: 'Setting Up Directus with Eleventy',
-        slug: 'setting-up-directus-with-eleventy',
-        stream_date: new Date().toISOString(),
-        summary: `
+    try {
+      console.log('Creating a sample stream recap...');
+      const streamRecap = await client.request(
+        createItem('stream_recap', {
+          // Don't include ID field, let Directus auto-generate it
+          status: 'published',
+          title: 'Setting Up Directus with Eleventy',
+          slug: 'setting-up-directus-with-eleventy',
+          stream_date: new Date().toISOString(),
+          summary: `
 # Setting Up Directus with Eleventy
 
 In this stream, we explored how to set up Directus as a headless CMS for an Eleventy website.
@@ -174,27 +249,31 @@ In this stream, we explored how to set up Directus as a headless CMS for an Elev
 - Directus provides a flexible, database-first approach to content management
 - Eleventy makes it easy to consume API data and generate static sites
 - The combination provides a powerful, yet simple, development experience
-        `,
-        topics_covered: ['Directus', 'Eleventy', 'Headless CMS', 'Docker', 'API'],
-        code_repository: 'https://github.com/alternadev/directus-eleventy-demo',
-        resources: [
-          {
-            title: 'Directus Documentation',
-            url: 'https://docs.directus.io/',
-            description: 'Official documentation for Directus'
-          },
-          {
-            title: 'Eleventy Documentation',
-            url: 'https://www.11ty.dev/docs/',
-            description: 'Official documentation for Eleventy'
-          }
-        ],
-        duration_minutes: 90,
-        featured: true
-      })
-    );
-    console.log(`Stream recap created with ID: ${streamRecap.id}`);
-    console.log('');
+          `,
+          topics_covered: ['Directus', 'Eleventy', 'Headless CMS', 'Docker', 'API'],
+          code_repository: 'https://github.com/alternadev/directus-eleventy-demo',
+          resources: [
+            {
+              title: 'Directus Documentation',
+              url: 'https://docs.directus.io/',
+              description: 'Official documentation for Directus'
+            },
+            {
+              title: 'Eleventy Documentation',
+              url: 'https://www.11ty.dev/docs/',
+              description: 'Official documentation for Eleventy'
+            }
+          ],
+          duration_minutes: 90,
+          featured: true
+        })
+      );
+      console.log(`Stream recap created with ID: ${streamRecap.id}`);
+      console.log('');
+    } catch (error) {
+      console.error('Error creating stream recap:', error.message);
+      console.log('');
+    }
     
     console.log('Sample content created successfully!');
     console.log('');
@@ -203,12 +282,14 @@ In this stream, we explored how to set up Directus as a headless CMS for an Elev
     
   } catch (error) {
     console.error('Error creating sample content:');
-    console.error(error.message);
+    console.error('Error message:', error.message);
+    console.error('Full error:', error);
     console.error('');
     console.error('Possible solutions:');
     console.error('1. Make sure Directus is running (pnpm directus:start)');
     console.error('2. Check your .env file for correct credentials');
     console.error('3. Run the setup script (pnpm directus:setup)');
+    console.error('4. Check if you have permission to create items in the collections');
     process.exit(1);
   }
 }
