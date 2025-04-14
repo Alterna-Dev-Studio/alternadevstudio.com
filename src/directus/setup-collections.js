@@ -54,9 +54,22 @@ export async function setupCollections(options = {}) {
     await client.login(adminEmail, adminPassword);
     console.log('Login successful!');
 
-    // Check if collections already exist
-    const existingCollectionsData = await client.request(readItems('directus_collections'));
-    const existingCollections = existingCollectionsData.map(collection => collection.collection);
+    // Check if collections already exist by trying to get items from each collection
+    const existingCollections = [];
+    
+    // Get the collection names from the collections object
+    const collectionNames = Object.values(collections).map(collection => collection.collection);
+    
+    // Try to get items from each collection to see if it exists
+    for (const collectionName of collectionNames) {
+      try {
+        await client.request(readItems(collectionName, { limit: 1 }));
+        existingCollections.push(collectionName);
+        console.log(`Collection ${collectionName} already exists.`);
+      } catch (error) {
+        console.log(`Collection ${collectionName} does not exist yet.`);
+      }
+    }
     
     // Create collections
     const success = await createAllCollections(client, existingCollections, collections);

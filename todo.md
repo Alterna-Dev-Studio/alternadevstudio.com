@@ -301,6 +301,9 @@ Below is a **detailed, actionable** checklist with micro-level tasks for each ph
 - [x] Add Minio configuration values to example environment files.
 - [x] Consolidate environment variables to use Minio server variables as fallbacks.
 - [x] Make environment file names consistent (.env.example).
+- [x] Remove redundant code that updates .env files with Minio configuration.
+- [x] Refactor Minio bucket setup into a separate reusable module.
+- [x] Replace Minio Client (mc) with direct API calls using curl.
 
 ## Notes & Best Practices
 - Use TDD or incremental testing for each feature.

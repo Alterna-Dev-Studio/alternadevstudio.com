@@ -35,10 +35,8 @@ export default async function teardown() {
       // Reset global variable
       global.__DIRECTUS_RUNNING__ = false;
       
-      // Force process to exit after a short delay to ensure all resources are released
-      setTimeout(() => {
-        process.exit(0);
-      }, 100);
+      // Force process to exit immediately to ensure all resources are released
+      process.exit(0);
       
     } catch (error) {
       console.error('Error stopping Directus:', error.message);
