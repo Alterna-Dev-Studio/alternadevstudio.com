@@ -2,35 +2,43 @@
 layout: base.njk
 title: Projects
 ---
-<h1>Projects</h1>
+<main class="container mx-auto p-6">
+  <section class="bg-white rounded-lg shadow-md p-8 mb-8">
+    <h2 class="text-2xl font-bold text-primary mb-6">Projects</h2>
 
-<div class="projects">
-  {% if projects.length > 0 %}
-    {% for project in projects %}
-    <article class="project-preview">
-      <h2><a href="/projects/{{ project.slug }}/">{{ project.title }}</a></h2>
-      {% if project.featured_image %}
-      <div class="featured-image">
-        <img src="{{ project.featured_image }}" alt="{{ project.title }}">
-      </div>
+    <div class="projects grid grid-cols-1 md:grid-cols-2 gap-8">
+      {% if projects.length > 0 %}
+        {% for project in projects %}
+        <article class="project-preview bg-gray-50 rounded-lg overflow-hidden shadow-sm">
+          {% if project.featured_image %}
+          <div class="featured-image h-48 overflow-hidden">
+            <img src="{{ project.featured_image }}" alt="{{ project.title }}" class="w-full h-full object-cover">
+          </div>
+          {% endif %}
+          <div class="p-6">
+            <h3 class="text-xl font-bold text-primary mb-2">
+              <a href="/projects/{{ project.slug }}/" class="hover:text-secondary transition-colors">{{ project.title }}</a>
+            </h3>
+            {% if project.short_description %}
+            <p class="short-description text-gray-700 mb-4">{{ project.short_description }}</p>
+            {% endif %}
+            {% if project.technologies and project.technologies.length > 0 %}
+            <div class="technologies mb-4">
+              <h4 class="text-sm font-semibold text-gray-600 mb-2">Technologies:</h4>
+              <div class="flex flex-wrap gap-2">
+                {% for tech in project.technologies %}
+                <span class="bg-gray-200 text-gray-800 text-xs px-2 py-1 rounded">{{ tech }}</span>
+                {% endfor %}
+              </div>
+            </div>
+            {% endif %}
+            <a href="/projects/{{ project.slug }}/" class="text-secondary hover:text-accent transition-colors font-medium">View Project →</a>
+          </div>
+        </article>
+        {% endfor %}
+      {% else %}
+        <p class="text-gray-700 col-span-2">No projects found.</p>
       {% endif %}
-      {% if project.short_description %}
-      <p class="short-description">{{ project.short_description }}</p>
-      {% endif %}
-      {% if project.technologies and project.technologies.length > 0 %}
-      <div class="technologies">
-        <h3>Technologies:</h3>
-        <ul>
-          {% for tech in project.technologies %}
-          <li>{{ tech }}</li>
-          {% endfor %}
-        </ul>
-      </div>
-      {% endif %}
-      <a href="/projects/{{ project.slug }}/" class="view-project">View Project</a>
-    </article>
-    {% endfor %}
-  {% else %}
-    <p>No projects found.</p>
-  {% endif %}
-</div>
+    </div>
+  </section>
+</main>

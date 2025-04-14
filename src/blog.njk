@@ -2,28 +2,34 @@
 layout: base.njk
 title: Blog Posts
 ---
-<h1>Blog Posts</h1>
+<main class="container mx-auto p-6">
+  <section class="bg-white rounded-lg shadow-md p-8 mb-8">
+    <h2 class="text-2xl font-bold text-primary mb-6">Blog Posts</h2>
 
-<div class="blog-posts">
-  {% if blog_posts.length > 0 %}
-    {% for post in blog_posts %}
-    <article class="blog-post-preview">
-      <h2><a href="/blog/{{ post.slug }}/">{{ post.title }}</a></h2>
-      <div class="meta">
-        {% if post.date_published %}
-        <time datetime="{{ post.date_published }}">
-          {{ post.date_published }}
-        </time>
-        {% endif %}
-        <span class="author">by {{ post.author }}</span>
-      </div>
-      {% if post.excerpt %}
-      <p class="excerpt">{{ post.excerpt }}</p>
+    <div class="blog-posts space-y-8">
+      {% if blog_posts.length > 0 %}
+        {% for post in blog_posts %}
+        <article class="blog-post-preview border-b border-gray-200 pb-6 last:border-0">
+          <h3 class="text-xl font-bold text-primary mb-2">
+            <a href="/blog/{{ post.slug }}/" class="hover:text-secondary transition-colors">{{ post.title }}</a>
+          </h3>
+          <div class="meta text-sm text-gray-600 mb-3">
+            {% if post.date_published %}
+            <time datetime="{{ post.date_published }}" class="mr-3">
+              {{ post.date_published }}
+            </time>
+            {% endif %}
+            <span class="author">by {{ post.author }}</span>
+          </div>
+          {% if post.excerpt %}
+          <p class="excerpt text-gray-700 mb-3">{{ post.excerpt }}</p>
+          {% endif %}
+          <a href="/blog/{{ post.slug }}/" class="text-secondary hover:text-accent transition-colors font-medium">Read More →</a>
+        </article>
+        {% endfor %}
+      {% else %}
+        <p class="text-gray-700">No blog posts found.</p>
       {% endif %}
-      <a href="/blog/{{ post.slug }}/" class="read-more">Read More</a>
-    </article>
-    {% endfor %}
-  {% else %}
-    <p>No blog posts found.</p>
-  {% endif %}
-</div>
+    </div>
+  </section>
+</main>

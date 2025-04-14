@@ -9,6 +9,32 @@
   <link rel="icon" type="image/png" sizes="16x16" href="/_assets/favicon-16x16.png">
 </head>
 <body>
-  {{ content | safe }}
+  <div class="min-h-screen bg-gray-100">
+    <header class="bg-primary text-white p-6 shadow-md">
+      <div class="container mx-auto flex flex-col md:flex-row justify-between items-center">
+        <h1 class="text-3xl font-bold mb-4 md:mb-0">
+          <a href="/" class="hover:text-secondary transition-colors">Alterna Development Studio</a>
+        </h1>
+        <nav>
+          <ul class="flex flex-wrap gap-6">
+            <li><a href="/" class="hover:text-secondary transition-colors">Home</a></li>
+            <li><a href="/about/" class="hover:text-secondary transition-colors">About</a></li>
+            <li><a href="/projects/" class="hover:text-secondary transition-colors">Projects</a></li>
+            <li><a href="/blog/" class="hover:text-secondary transition-colors">Blog</a></li>
+            <li><a href="/streams/" class="hover:text-secondary transition-colors">Live Product Dev</a></li>
+            <li><a href="/contact/" class="hover:text-secondary transition-colors">Contact</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    {{ content | safe }}
+
+    <footer class="bg-primary text-white p-6 mt-12">
+      <div class="container mx-auto">
+        <p class="text-center">&copy; 2025 Alterna Development Studio. All rights reserved.</p>
+      </div>
+    </footer>
+  </div>
 </body>
 </html>
