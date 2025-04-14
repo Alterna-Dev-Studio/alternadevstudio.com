@@ -3,6 +3,7 @@
  * 
  * This file is responsible for starting Directus before the tests run.
  * It uses docker-compose to start the Directus services in the background.
+ * It also sets up the collections using the shared module.
  */
 
 import { execSync } from 'child_process';
@@ -10,6 +11,7 @@ import { join } from 'path';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 import { setTimeout } from 'timers/promises';
+import { setupCollections } from '../src/directus/setup-collections.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -58,6 +60,16 @@ export default async function setup() {
     
     if (!isReady) {
       throw new Error('Directus failed to start within the timeout period');
+    }
+    
+    // Set up collections using the shared module
+    console.log('Setting up collections for tests...');
+    const success = await setupCollections();
+    
+    if (success) {
+      console.log('Collections set up successfully!');
+    } else {
+      console.warn('Failed to set up collections. Tests may fail if collections do not exist.');
     }
     
     // Set global variable to indicate Directus is running

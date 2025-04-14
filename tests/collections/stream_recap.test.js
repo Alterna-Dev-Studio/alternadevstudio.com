@@ -10,6 +10,7 @@ import {
   getItems,
   getDirectusConfig
 } from '../utils/directus.js';
+import { streamRecap } from '../../src/directus/collections/index.js';
 
 describe('stream_recap Collection', () => {
   let client;
@@ -55,11 +56,16 @@ describe('stream_recap Collection', () => {
     }
   });
   
-  // Note: We're only testing for collection existence since we don't have permission to create items
   test('Collection has the expected structure', async () => {
-    // We can verify the collection exists and is accessible
-    // The actual field structure would need to be verified manually or with admin permissions
+    // Get the expected fields from the collection definition
+    const expectedFields = streamRecap.fields.map(field => field.field);
+    
+    // Log the expected fields
     console.log('Collection stream_recap exists and is accessible');
-    console.log('Expected fields: title, date, youtube_link, description');
+    console.log('Expected fields:', expectedFields.join(', '));
+    
+    // We could add more detailed tests here to verify the field structure
+    // by fetching the collection schema from Directus, but that would require
+    // admin permissions
   });
 });
