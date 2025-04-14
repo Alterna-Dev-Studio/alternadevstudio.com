@@ -1,0 +1,178 @@
+{
+  "collection": "projects",
+  "meta": {
+    "icon": "code",
+    "note": "Development projects showcase",
+    "display_template": "{{title}}",
+    "archive_field": "status",
+    "archive_value": "archived",
+    "unarchive_value": "draft",
+    "singleton": false
+  },
+  "schema": {
+    "name": "projects"
+  },
+  "fields": [
+    {
+      "field": "status",
+      "type": "string",
+      "meta": {
+        "interface": "select-dropdown",
+        "options": {
+          "choices": [
+            { "text": "Published", "value": "published" },
+            { "text": "Draft", "value": "draft" },
+            { "text": "Archived", "value": "archived" }
+          ]
+        },
+        "width": "half",
+        "required": true
+      },
+      "schema": {
+        "default_value": "draft"
+      }
+    },
+    {
+      "field": "title",
+      "type": "string",
+      "meta": {
+        "interface": "input",
+        "width": "full",
+        "required": true
+      }
+    },
+    {
+      "field": "slug",
+      "type": "string",
+      "meta": {
+        "interface": "input",
+        "width": "full",
+        "note": "URL-friendly version of the title",
+        "required": true
+      }
+    },
+    {
+      "field": "date_completed",
+      "type": "timestamp",
+      "meta": {
+        "interface": "datetime",
+        "width": "half",
+        "display": "datetime"
+      }
+    },
+    {
+      "field": "featured_image",
+      "type": "uuid",
+      "meta": {
+        "interface": "file-image",
+        "special": ["file"],
+        "width": "full"
+      }
+    },
+    {
+      "field": "description",
+      "type": "text",
+      "meta": {
+        "interface": "input-rich-text-md",
+        "width": "full",
+        "note": "Detailed description of the project",
+        "required": true
+      }
+    },
+    {
+      "field": "short_description",
+      "type": "text",
+      "meta": {
+        "interface": "input-multiline",
+        "width": "full",
+        "note": "Brief summary of the project"
+      }
+    },
+    {
+      "field": "technologies",
+      "type": "json",
+      "meta": {
+        "interface": "tags",
+        "width": "full",
+        "options": {
+          "placeholder": "Add a technology..."
+        },
+        "special": ["cast-json"]
+      }
+    },
+    {
+      "field": "github_url",
+      "type": "string",
+      "meta": {
+        "interface": "input",
+        "width": "half",
+        "note": "Link to GitHub repository"
+      }
+    },
+    {
+      "field": "live_url",
+      "type": "string",
+      "meta": {
+        "interface": "input",
+        "width": "half",
+        "note": "Link to live project"
+      }
+    },
+    {
+      "field": "featured",
+      "type": "boolean",
+      "meta": {
+        "interface": "boolean",
+        "width": "half",
+        "note": "Whether this project should be featured on the homepage"
+      },
+      "schema": {
+        "default_value": false
+      }
+    },
+    {
+      "field": "sort_order",
+      "type": "integer",
+      "meta": {
+        "interface": "input",
+        "width": "half",
+        "note": "Order in which to display the project (lower numbers first)"
+      },
+      "schema": {
+        "default_value": 0
+      }
+    },
+    {
+      "field": "gallery_images",
+      "type": "json",
+      "meta": {
+        "interface": "list",
+        "special": ["cast-json"],
+        "width": "full",
+        "note": "Additional images of the project",
+        "options": {
+          "template": "{{image}}",
+          "fields": [
+            {
+              "field": "image",
+              "type": "uuid",
+              "meta": {
+                "interface": "file-image",
+                "special": ["file"],
+                "width": "full"
+              }
+            },
+            {
+              "field": "caption",
+              "type": "string",
+              "meta": {
+                "interface": "input",
+                "width": "full"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

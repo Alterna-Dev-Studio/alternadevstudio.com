@@ -68,7 +68,7 @@ Below is an updated plan explicitly referencing **Nunjucks** for templating with
 1. **Initialize Project**  
    - `git init`, `.gitignore`, `package.json`.
 2. **Install 11ty & Nunjucks**  
-   - `npm install @11ty/eleventy nunjucks`.
+   - `pnpm install @11ty/eleventy nunjucks`.
 3. **Hello World Page**  
    - `index.njk` in `src` or `pages`.
 4. **GitHub Actions & Pages**  
@@ -168,7 +168,7 @@ Create:
    - Output directory: "_site"
    - `markdownTemplateEngine` and `htmlTemplateEngine` set to "njk" for Nunjucks
 2. A folder named `src` with an `index.njk` that prints "Hello World" in an HTML wrapper (e.g., `<h1>`).
-3. Provide the final code for each file. Confirm we can run "npm run build" and "npm run start".
+3. Provide the final code for each file. Confirm we can run "pnpm run build" and "pnpm run start".
 ```
 </details>
 
@@ -181,7 +181,7 @@ Create:
 Now write a GitHub Actions YAML config (`.github/workflows/deploy.yml`) that:
 - Checks out code
 - Installs dependencies
-- Builds with `npm run build`
+- Builds with `pnpm run build`
 - Deploys `_site` to the `gh-pages` branch
 
 Finally, explain how to enable GitHub Pages from the repo settings to serve from `gh-pages`.

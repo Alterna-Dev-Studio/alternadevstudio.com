@@ -1,0 +1,141 @@
+# Docker Compose file for Directus with PostgreSQL, Minio (S3), and MailDev
+#
+# This compose file sets up Directus with PostgreSQL as the only database,
+# along with Minio for S3 storage and MailDev for email testing.
+#
+# For more information on production deployment, see:
+# https://docs.directus.io/self-hosted/docker-guide.html
+#
+# Usage:
+# 1. Copy example.env to .env and update values
+# 2. Run: docker-compose up -d
+#
+# Ports:
+#   Directus:         8055
+#   Postgres:         5432
+#   Maildev SMTP:     1025
+#   Maildev Web-UI:   1080
+#   Minio (S3):       9000
+#   Minio Admin:      9001
+#
+# Default Credentials (if not changed in .env):
+#   Postgres:
+#     User:          postgres
+#     Password:      secret
+#     Database:      directus
+#
+#   Minio:
+#     Key:           minioadmin
+#     Secret:        minioadmin
+#     (Make sure to set S3_FORCE_PATH_STYLE to true)
+
+version: '3.8'
+
+services:
+  postgres:
+    image: postgis/postgis:13-3.4-alpine
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-secret}
+      POSTGRES_DB: ${POSTGRES_DB:-directus}
+    ports:
+      - 5432:5432
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  minio:
+    image: minio/minio
+    command: server /data/minio/ --console-address :9001
+    volumes:
+      - minio_data:/data/minio
+    ports:
+      - 9000:9000
+      - 9001:9001
+    environment:
+      MINIO_ROOT_USER: ${MINIO_ROOT_USER:-minioadmin}
+      MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD:-minioadmin}
+    restart: unless-stopped
+
+  maildev:
+    image: maildev/maildev
+    ports:
+      - 1025:1025
+      - 1080:1080
+    restart: unless-stopped
+
+  directus:
+    image: directus/directus:latest
+    ports:
+      - 8055:8055
+    volumes:
+      - directus_uploads:/directus/uploads
+      - directus_extensions:/directus/extensions
+    environment:
+      # Database Configuration
+      DB_CLIENT: ${DB_CLIENT:-pg}
+      DB_HOST: ${DB_HOST:-postgres}
+      DB_PORT: ${DB_PORT:-5432}
+      DB_DATABASE: ${DB_DATABASE:-directus}
+      DB_USER: ${DB_USER:-postgres}
+      DB_PASSWORD: ${DB_PASSWORD:-secret}
+      
+      # Directus Configuration
+      KEY: ${KEY:-replace-with-random-key}
+      SECRET: ${SECRET:-replace-with-random-secret}
+      
+      # Admin User
+      ADMIN_EMAIL: ${ADMIN_EMAIL:-admin@example.com}
+      ADMIN_PASSWORD: ${ADMIN_PASSWORD:-change-me-please}
+      
+      # Email Configuration for MailDev
+      EMAIL_FROM: ${EMAIL_FROM:-directus@directus.io}
+      EMAIL_TRANSPORT: ${EMAIL_TRANSPORT:-smtp}
+      EMAIL_SMTP_HOST: ${EMAIL_SMTP_HOST:-maildev}
+      EMAIL_SMTP_PORT: ${EMAIL_SMTP_PORT:-1025}
+      
+      # Optional: S3 Storage Configuration
+      STORAGE_LOCATIONS: ${STORAGE_LOCATIONS:-local}
+      STORAGE_LOCAL_DRIVER: ${STORAGE_LOCAL_DRIVER:-local}
+      STORAGE_LOCAL_ROOT: ${STORAGE_LOCAL_ROOT:-/directus/uploads}
+      
+      # Uncomment to use Minio as S3 storage
+      # STORAGE_S3_DRIVER: s3
+      # STORAGE_S3_KEY: minioadmin
+      # STORAGE_S3_SECRET: minioadmin
+      # STORAGE_S3_ENDPOINT: http://minio:9000
+      # STORAGE_S3_BUCKET: directus
+      # STORAGE_S3_REGION: us-east-1
+      # STORAGE_S3_FORCE_PATH_STYLE: true
+      
+      # Optional: Cache Configuration
+      CACHE_ENABLED: ${CACHE_ENABLED:-false}
+      CACHE_STORE: ${CACHE_STORE:-memory}
+      
+      # Optional: CORS Configuration
+      CORS_ENABLED: ${CORS_ENABLED:-false}
+      CORS_ORIGIN: ${CORS_ORIGIN:-*}
+      
+      # Optional: Rate Limiting
+      RATE_LIMITER_ENABLED: ${RATE_LIMITER_ENABLED:-false}
+      RATE_LIMITER_STORE: ${RATE_LIMITER_STORE:-memory}
+      RATE_LIMITER_POINTS: ${RATE_LIMITER_POINTS:-50}
+      RATE_LIMITER_DURATION: ${RATE_LIMITER_DURATION:-1}
+    depends_on:
+      postgres:
+        condition: service_healthy
+      minio:
+        condition: service_started
+      maildev:
+        condition: service_started
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
+  minio_data:
+  directus_uploads:
+  directus_extensions:

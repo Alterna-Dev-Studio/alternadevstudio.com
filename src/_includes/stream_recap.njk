@@ -1,0 +1,72 @@
+---
+layout: base.njk
+---
+<article class="stream-recap">
+  <header>
+    <h1>{{ stream_recap.title }}</h1>
+    <div class="meta">
+      <time datetime="{{ stream_recap.stream_date | date('YYYY-MM-DD') }}">
+        Streamed: {{ stream_recap.stream_date | date('MMMM D, YYYY') }}
+      </time>
+      {% if stream_recap.duration_minutes %}
+      <span class="duration">{{ stream_recap.duration_minutes }} minutes</span>
+      {% endif %}
+    </div>
+  </header>
+  
+  {% if stream_recap.thumbnail %}
+  <div class="thumbnail">
+    <img src="{{ stream_recap.thumbnail }}" alt="{{ stream_recap.title }}">
+  </div>
+  {% endif %}
+  
+  {% if stream_recap.video_url %}
+  <div class="video">
+    <a href="{{ stream_recap.video_url }}" target="_blank" rel="noopener noreferrer">
+      Watch the Stream Recording
+    </a>
+  </div>
+  {% endif %}
+  
+  <div class="summary">
+    {{ stream_recap.summary | markdown | safe }}
+  </div>
+  
+  {% if stream_recap.topics_covered and stream_recap.topics_covered.length > 0 %}
+  <div class="topics">
+    <h3>Topics Covered:</h3>
+    <ul>
+      {% for topic in stream_recap.topics_covered %}
+      <li>{{ topic }}</li>
+      {% endfor %}
+    </ul>
+  </div>
+  {% endif %}
+  
+  {% if stream_recap.code_repository %}
+  <div class="code-repository">
+    <h3>Code Repository:</h3>
+    <a href="{{ stream_recap.code_repository }}" target="_blank" rel="noopener noreferrer">
+      {{ stream_recap.code_repository }}
+    </a>
+  </div>
+  {% endif %}
+  
+  {% if stream_recap.resources and stream_recap.resources.length > 0 %}
+  <div class="resources">
+    <h3>Resources:</h3>
+    <ul>
+      {% for resource in stream_recap.resources %}
+      <li>
+        <a href="{{ resource.url }}" target="_blank" rel="noopener noreferrer">
+          {{ resource.title }}
+        </a>
+        {% if resource.description %}
+        <p>{{ resource.description }}</p>
+        {% endif %}
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+  {% endif %}
+</article>
