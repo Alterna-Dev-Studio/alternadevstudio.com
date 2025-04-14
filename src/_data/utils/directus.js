@@ -21,8 +21,8 @@ if (existsSync(envPath)) {
 
 // Directus connection details with fallbacks
 const directusUrl = process.env.DIRECTUS_URL || 'http://localhost:8055';
-const email = process.env.DIRECTUS_EMAIL || 'admin@alternadevstudio.com';
-const password = process.env.DIRECTUS_PASSWORD || 'admin123';
+const email = process.env.DIRECTUS_EMAIL || 'admin@example.com';
+const password = process.env.DIRECTUS_PASSWORD || 'change-me-please';
 
 /**
  * Create a Directus client

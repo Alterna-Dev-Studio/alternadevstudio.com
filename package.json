@@ -19,7 +19,8 @@
     "directus:setup": "cd tools/directus && ./setup-dev-environment.sh",
     "directus:start": "cd tools/directus && docker-compose up -d",
     "directus:stop": "cd tools/directus && docker-compose down",
-    "directus:test": "node tools/directus/test-connection.js"
+    "directus:test": "node tools/directus/test-connection.js",
+    "directus:sample-content": "node tools/directus/create-sample-content.js"
   },
   "keywords": [],
   "author": "",

@@ -51,13 +51,29 @@ pnpm directus:stop
 
 # Test connection to Directus
 pnpm directus:test
+
+# Create sample content in Directus
+pnpm directus:sample-content
 ```
+
+### Testing the Connection
 
 The test script will check:
 - If Directus is running
 - If you can log in with your credentials
 - If the required collections exist
 - How many items are in each collection
+
+For detailed information about testing the connection, see [test-directus-connection.md](test-directus-connection.md).
+
+### Creating Sample Content
+
+The sample content script will create:
+- A sample blog post about Directus and Eleventy
+- A sample project for the AlternaDevStudio website
+- A sample stream recap about setting up Directus with Eleventy
+
+This is useful for testing the integration between Directus and Eleventy without having to manually create content.
 
 ## Accessing Directus
 

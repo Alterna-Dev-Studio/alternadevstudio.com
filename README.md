@@ -73,7 +73,12 @@ pnpm directus:stop
 
 # Test connection to Directus
 pnpm directus:test
+
+# Create sample content in Directus
+pnpm directus:sample-content
 ```
+
+For detailed information about testing the connection to Directus, see [test-directus-connection.md](test-directus-connection.md).
 
 ## Development
 

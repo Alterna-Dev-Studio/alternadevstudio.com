@@ -38,7 +38,15 @@ else
 fi
 echo ""
 
-# Step 5: Start the development server
+# Step 5: Ask if the user wants to create sample content
+read -p "Do you want to create sample content in Directus? (y/n): " create_sample_content
+if [ "$create_sample_content" = "y" ] || [ "$create_sample_content" = "Y" ]; then
+    echo "Creating sample content in Directus..."
+    pnpm directus:sample-content
+    echo ""
+fi
+
+# Step 6: Start the development server
 echo "Starting development server..."
 echo "You can access the website at: http://localhost:8080"
 echo "You can access Directus at: http://localhost:8055"

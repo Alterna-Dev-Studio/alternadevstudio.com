@@ -32,8 +32,9 @@ if [ ! -f .env ]; then
     sed -i "s/SECRET=replace-with-random-secret/SECRET=$SECRET/" .env
     
     # Set a default admin password for development
-    sed -i "s/ADMIN_PASSWORD=change-me-please/ADMIN_PASSWORD=admin123/" .env
-    sed -i "s/ADMIN_EMAIL=admin@example.com/ADMIN_EMAIL=admin@alternadevstudio.com/" .env
+    # We're keeping the default values from the example.env file
+    # sed -i "s/ADMIN_PASSWORD=change-me-please/ADMIN_PASSWORD=admin123/" .env
+    # sed -i "s/ADMIN_EMAIL=admin@example.com/ADMIN_EMAIL=admin@alternadevstudio.com/" .env
     
     echo "Environment file created with secure keys."
 else
