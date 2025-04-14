@@ -1,21 +1,20 @@
 /**
  * Data file for projects
  * 
- * This file exports the projects data from the directus.js file
+ * This file exports projects data fetched from Directus
  */
 
-import directusData from './utils/directus.js';
+import { fetchProjects } from './utils/directus.js';
 
 export default async function() {
   console.log('Projects data file loaded');
   
-  // Get the data from directus.js
-  const data = await directusData();
+  // Fetch projects data
+  const projects = await fetchProjects();
   
   // Log the projects data
-  console.log('Projects data:', data.projects);
-  console.log('Projects array length:', data.projects.length);
+  console.log('Projects array length:', projects.length);
   
   // Return the projects data
-  return data.projects;
+  return projects;
 }
