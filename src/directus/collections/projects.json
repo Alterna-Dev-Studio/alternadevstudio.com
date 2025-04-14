@@ -49,6 +49,9 @@
         "width": "full",
         "note": "URL-friendly version of the title",
         "required": true
+      },
+      "schema": {
+        "is_unique": true
       }
     },
     {
