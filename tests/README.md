@@ -11,7 +11,8 @@ This directory contains a testing framework for Directus that can:
 - `setup.js`: Global setup file that starts Directus before tests run
 - `teardown.js`: Global teardown file that stops Directus after tests run
 - `utils/directus.js`: Utility functions for interacting with Directus
-- `directus-connection.test.js`: Example test that verifies Directus is running and accessible
+- `directus-connection.test.js`: Test that verifies Directus is running and accessible using the SDK
+- `directus-sdk.test.js`: Test that verifies Directus is running and accessible using the SDK with more detailed output (migrated from `tools/directus/test-connection.js`)
 
 ## How to Use
 

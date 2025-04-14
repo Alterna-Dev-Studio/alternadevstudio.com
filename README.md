@@ -71,8 +71,11 @@ pnpm directus:start
 # Stop Directus
 pnpm directus:stop
 
-# Test connection to Directus
+# Test connection to Directus (runs Jest tests)
 pnpm directus:test
+
+# Run all tests
+pnpm test
 
 # Create sample content in Directus
 pnpm directus:sample-content
@@ -124,6 +127,28 @@ pnpm build
 # Clean the build directory
 pnpm clean
 ```
+
+## Testing
+
+This project uses Jest for testing. The tests are located in the `tests` directory.
+
+```bash
+# Run all tests
+pnpm test
+
+# Run tests in watch mode (tests will re-run when files change)
+pnpm test:watch
+
+# Run only Directus-related tests
+pnpm directus:test
+```
+
+The testing framework includes:
+
+- Tests for Directus connection using the SDK
+- Tests for Directus collections and content
+
+For more information about the testing framework, see [tests/README.md](tests/README.md).
 
 ## License
 

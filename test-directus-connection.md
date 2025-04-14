@@ -1,21 +1,28 @@
 # Testing the Directus Connection
 
-This guide demonstrates how to test the connection to Directus and verify that the required collections exist using the command line.
+This guide demonstrates how to test the connection to Directus and verify that the required collections exist.
 
-## Using the Test Script
+## Using Jest Tests
 
-The easiest way to test the connection is to use the provided test script:
+The recommended way to test the connection is to use the Jest tests:
 
 ```bash
-# Run the test script
+# Run all Directus tests
 pnpm directus:test
+
+# Or run all tests
+pnpm test
 ```
 
-This script will:
+These tests will:
 1. Check if Directus is running
 2. Attempt to log in with the configured credentials
 3. Check if the required collections exist
 4. Count the number of items in each collection
+
+The project includes two types of Directus tests:
+- `directus-connection.test.js`: Basic tests using the Directus SDK
+- `directus-sdk.test.js`: More detailed tests using the Directus SDK
 
 ### Expected Output
 

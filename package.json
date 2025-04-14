@@ -20,7 +20,7 @@
     "directus:setup": "cd tools/directus && ./setup-dev-environment.sh",
     "directus:start": "cd tools/directus && docker-compose up -d",
     "directus:stop": "cd tools/directus && docker-compose down",
-    "directus:test": "node tools/directus/test-connection.js",
+    "directus:test": "pnpm test -- -t 'Directus'",
     "directus:sample-content": "node tools/directus/create-sample-content.js",
     "directus:minio-setup": "cd tools/directus && ./configure-minio.sh",
     "directus:minio-setup-test": "cd tools/directus && ./setup-minio-automated.sh --test"
