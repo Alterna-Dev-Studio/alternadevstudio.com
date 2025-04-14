@@ -76,7 +76,8 @@ Key development scripts include:
   "test": "NODE_OPTIONS=--experimental-vm-modules pnpm exec jest --detectOpenHandles",
   "directus:setup": "cd tools/directus && ./setup-dev-environment.sh",
   "directus:start": "cd tools/directus && docker-compose up -d",
-  "directus:stop": "cd tools/directus && docker-compose down"
+  "directus:stop": "cd tools/directus && docker-compose down",
+  "directus:clean": "cd tools/directus && ./clean.sh"
 }
 ```
 

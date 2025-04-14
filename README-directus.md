@@ -49,6 +49,9 @@ pnpm directus:start
 # Stop Directus
 pnpm directus:stop
 
+# Clean up Directus (stop containers and remove volumes)
+pnpm directus:clean
+
 # Test connection to Directus
 pnpm directus:test
 
@@ -309,6 +312,11 @@ If you encounter issues with the Directus setup:
 
 4. If all else fails, you can reset the environment:
    ```bash
+   # Option 1: Using the clean script (recommended)
+   pnpm directus:clean
+   pnpm directus:setup
+   
+   # Option 2: Manual reset
    cd tools/directus
    docker-compose down -v
    pnpm directus:setup
