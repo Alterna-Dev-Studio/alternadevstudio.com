@@ -291,6 +291,17 @@ Below is a **detailed, actionable** checklist with micro-level tasks for each ph
 - [ ] Implement component testing for UI elements.
 - [ ] Add end-to-end tests for critical user flows.
 
+## 13. **Refactoring and Optimization**
+
+### 13.1 Script Consolidation
+- [x] Incorporate Minio setup directly into the calling scripts.
+- [x] Remove unnecessary configuration options from Minio setup.
+- [x] Eliminate separate Minio setup scripts.
+- [x] Use environment variables for Minio configuration if available.
+- [x] Add Minio configuration values to example environment files.
+- [x] Consolidate environment variables to use Minio server variables as fallbacks.
+- [x] Make environment file names consistent (.env.example).
+
 ## Notes & Best Practices
 - Use TDD or incremental testing for each feature.
 - Keep commits atomic (one feature/fix per commit).
