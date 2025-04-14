@@ -36,6 +36,11 @@ Below is a **detailed, actionable** checklist with micro-level tasks for each ph
 - [x] Enable GitHub Pages in repo settings.
 - [x] Confirm site is published at `[username].github.io/[repo-name]` or custom domain.
 
+### 1.4 Development Workflow
+- [x] Create streamlined Makefile with essential targets.
+  - [x] Add targets for dev, shutdown, reset, build, clean, and test.
+  - [x] Document usage in README.md.
+
 ---
 
 ## 2. **Directus CMS Integration**
