@@ -13,6 +13,7 @@
     "start-ghpages": "pnpm exec eleventy --pathprefix=/eleventy-base-blog/ --serve --quiet",
     "debug": "cross-env DEBUG=Eleventy* pnpm exec eleventy",
     "debugstart": "cross-env DEBUG=Eleventy* pnpm exec eleventy --serve --quiet",
+    "eleventy:shutdown": "./tools/eleventy-shutdown.sh",
     "benchmark": "cross-env DEBUG=Eleventy:Benchmark* pnpm exec eleventy",
     "test": "NODE_OPTIONS=--experimental-vm-modules pnpm exec jest --detectOpenHandles",
     "test:watch": "NODE_OPTIONS=--experimental-vm-modules pnpm exec jest --watch --detectOpenHandles",

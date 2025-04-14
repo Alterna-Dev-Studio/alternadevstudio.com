@@ -174,6 +174,30 @@ npm start
 npm test
 ```
 
+### Running Eleventy Development Server
+
+When starting the Eleventy development server, always append `&` to the command to run it in the background:
+
+✅ **Correct:**
+```bash
+pnpm start &
+pnpm debugstart &
+```
+
+❌ **Incorrect:**
+```bash
+pnpm start
+pnpm debugstart
+```
+
+This ensures the server runs in the background and doesn't block the terminal. To shut down the server when you're done, use:
+
+```bash
+pnpm eleventy:shutdown
+```
+
+This will find and terminate all running Eleventy server processes.
+
 ## Docker Commands
 
 For Docker-related commands, use the scripts defined in package.json:
