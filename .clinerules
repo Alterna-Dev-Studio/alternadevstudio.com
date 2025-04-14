@@ -176,15 +176,9 @@ npm test
 
 ### Running Eleventy Development Server
 
-When starting the Eleventy development server, always append `&` to the command to run it in the background:
+The Eleventy development server commands in package.json are configured to run in the background automatically. Simply use:
 
 ✅ **Correct:**
-```bash
-pnpm start &
-pnpm debugstart &
-```
-
-❌ **Incorrect:**
 ```bash
 pnpm start
 pnpm debugstart

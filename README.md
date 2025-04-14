@@ -43,8 +43,8 @@ pnpm install
 # Set up Directus
 pnpm directus:setup
 
-# Start the development server in the background
-pnpm start &
+# Start the development server
+pnpm start
 ```
 
 ## Directus Integration
@@ -119,10 +119,10 @@ For detailed information about testing the connection to Directus, see [test-dir
 
 ```bash
 # Start the development server in the background
-pnpm start &
+pnpm start
 
 # Start the development server with debug output in the background
-pnpm debugstart &
+pnpm debugstart
 
 # Shut down the Eleventy server
 pnpm eleventy:shutdown
@@ -134,7 +134,7 @@ pnpm build
 pnpm clean
 ```
 
-> **Note**: Always run the development server with `&` at the end to run it in the background. This allows you to continue using the terminal while the server is running. When you're done, use `pnpm eleventy:shutdown` to stop the server.
+> **Note**: The development server commands are configured to run in the background automatically. This allows you to continue using the terminal while the server is running. When you're done, use `pnpm eleventy:shutdown` to stop the server.
 
 ## Testing
 
