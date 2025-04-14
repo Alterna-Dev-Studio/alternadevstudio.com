@@ -21,7 +21,9 @@
     "directus:start": "cd tools/directus && docker-compose up -d",
     "directus:stop": "cd tools/directus && docker-compose down",
     "directus:test": "node tools/directus/test-connection.js",
-    "directus:sample-content": "node tools/directus/create-sample-content.js"
+    "directus:sample-content": "node tools/directus/create-sample-content.js",
+    "directus:minio-setup": "cd tools/directus && ./configure-minio.sh",
+    "directus:minio-setup-test": "cd tools/directus && ./setup-minio-automated.sh --test"
   },
   "keywords": [],
   "author": "",

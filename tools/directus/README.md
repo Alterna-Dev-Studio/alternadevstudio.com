@@ -71,7 +71,9 @@ The `docker-compose.yml` file is configured to run:
 - **Access Key**: minioadmin
 - **Secret Key**: minioadmin
 
-To set up Minio for use with Directus:
+#### Interactive Setup
+
+To set up Minio for use with Directus using an interactive prompt:
 ```bash
 cd tools/directus
 ./setup-minio.sh
@@ -80,6 +82,53 @@ This script will:
 1. Create a bucket in Minio for Directus
 2. Set the bucket policy to allow public read access (optional)
 3. Help you configure Directus to use Minio for storage
+
+#### Automated Setup
+
+To automate the Minio setup without interactive prompts:
+```bash
+cd tools/directus
+./configure-minio.sh [options]
+```
+
+Available options:
+- `-e, --endpoint ENDPOINT`: Minio endpoint URL (default: http://localhost:9000)
+- `-a, --access-key KEY`: Minio access key (default: minioadmin)
+- `-s, --secret-key SECRET`: Minio secret key (default: minioadmin)
+- `-b, --bucket NAME`: Bucket name (default: directus)
+- `-p, --public y|n`: Set public read access (default: y)
+- `-h, --help`: Show help message
+
+Examples:
+```bash
+# Use all defaults
+./configure-minio.sh
+
+# Specify a custom bucket name
+./configure-minio.sh --bucket my-custom-bucket
+
+# Specify custom credentials
+./configure-minio.sh --access-key mykey --secret-key mysecret
+
+# Disable public read access
+./configure-minio.sh --public n
+
+# Test mode - print configuration without executing
+./configure-minio.sh --test
+```
+
+You can also use environment variables:
+```bash
+MINIO_BUCKET_NAME=my-bucket MINIO_SET_PUBLIC=n ./configure-minio.sh
+```
+
+The test mode option (`--test` or `-t`) is particularly useful for verifying your configuration without actually making any changes. This can be helpful when automating the setup process or when you want to ensure your configuration is correct before proceeding.
+
+For convenience, there's also an npm script that runs the setup in test mode:
+```bash
+# From the project root directory
+pnpm directus:minio-setup-test
+```
 
 ### MailDev Email Testing
 - **SMTP Server**: localhost:1025

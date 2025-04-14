@@ -54,7 +54,41 @@ pnpm directus:test
 
 # Create sample content in Directus
 pnpm directus:sample-content
+
+# Set up Minio for S3 storage with automated configuration
+pnpm directus:minio-setup
 ```
+
+### Automated Minio Setup
+
+The `directus:minio-setup` script allows you to configure Minio for S3 storage without interactive prompts. You can pass options to customize the configuration:
+
+```bash
+# Use default configuration
+pnpm directus:minio-setup
+
+# Specify a custom bucket name
+pnpm directus:minio-setup -- --bucket my-custom-bucket
+
+# Specify custom credentials
+pnpm directus:minio-setup -- --access-key mykey --secret-key mysecret
+
+# Test mode - print configuration without executing
+pnpm directus:minio-setup-test
+
+# See all available options
+pnpm directus:minio-setup -- --help
+```
+
+You can also use environment variables to configure Minio:
+
+```bash
+MINIO_BUCKET_NAME=my-bucket MINIO_SET_PUBLIC=n pnpm directus:minio-setup
+```
+
+The test mode option (`--test` or `-t`) is particularly useful for verifying your configuration without actually making any changes. This can be helpful when automating the setup process or when you want to ensure your configuration is correct before proceeding.
+
+During the setup process with `pnpm directus:setup` or `pnpm setup`, you'll also be given the option to set up Minio with automated configuration, which will prompt you for the configuration values but will not require interactive prompts during the actual Minio setup. You'll also be asked if you want to run in test mode, which will show you the configuration without making any changes.
 
 ### Testing the Connection
 

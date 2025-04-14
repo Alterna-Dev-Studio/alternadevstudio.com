@@ -72,8 +72,34 @@ echo ""
 # Step 4: Set up Minio for S3 storage (optional)
 read -p "Do you want to set up Minio for S3 storage? (y/n): " setup_minio
 if [ "$setup_minio" = "y" ] || [ "$setup_minio" = "Y" ]; then
-    echo "Setting up Minio..."
-    ./setup-minio.sh
+    read -p "Use interactive setup (i) or automated setup (a)? (i/a): " minio_setup_type
+    
+    if [ "$minio_setup_type" = "a" ] || [ "$minio_setup_type" = "A" ]; then
+        echo "Setting up Minio with automated configuration..."
+        
+        # Check if environment variables are set, otherwise use defaults
+        MINIO_ENDPOINT=${MINIO_ENDPOINT:-"http://localhost:9000"}
+        MINIO_ACCESS_KEY=${MINIO_ACCESS_KEY:-"minioadmin"}
+        MINIO_SECRET_KEY=${MINIO_SECRET_KEY:-"minioadmin"}
+        MINIO_BUCKET_NAME=${MINIO_BUCKET_NAME:-"directus"}
+        MINIO_SET_PUBLIC=${MINIO_SET_PUBLIC:-"y"}
+        
+        # Ask if this is a test run
+        read -p "Is this a test run? (y/n, default: n): " test_run
+        test_run=${test_run:-"n"}
+        
+        # Run the automated setup script
+        ./setup-minio-automated.sh \
+            --endpoint "$MINIO_ENDPOINT" \
+            --access-key "$MINIO_ACCESS_KEY" \
+            --secret-key "$MINIO_SECRET_KEY" \
+            --bucket "$MINIO_BUCKET_NAME" \
+            --public "$MINIO_SET_PUBLIC" \
+            $([ "$test_run" = "y" ] || [ "$test_run" = "Y" ] && echo "--test")
+    else
+        echo "Setting up Minio with interactive configuration..."
+        ./setup-minio.sh
+    fi
     echo ""
 fi
 
