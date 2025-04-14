@@ -1,0 +1,318 @@
+<h1>Alterna Dev Studio Website – Master To-Do Checklist (Expanded)</h1>
+<p>Below is a <strong>detailed, actionable</strong> checklist with micro-level tasks for each phase. Refer to the <a href="#">Website Specification</a> for context. Each section is broken into multiple, smaller tasks to ensure thoroughness.</p>
+<hr>
+<h2>1. <strong>Project Setup</strong></h2>
+<h3>1.1 Initialize the Repository</h3>
+<ul>
+<li>[x] Create a new GitHub repo or choose an existing one.</li>
+<li>[x] Clone repository locally.</li>
+<li>[x] Add <code>.gitignore</code> (ignore <code>node_modules</code>, <code>.DS_Store</code>, etc.).</li>
+<li>[x] Create <code>package.json</code>:
+<ul>
+<li>[ ] for package management, use pnpm</li>
+<li>[x] Scripts: <code>&quot;build&quot;: &quot;eleventy&quot;</code>, <code>&quot;start&quot;: &quot;eleventy --serve&quot;</code>.</li>
+<li>[x] Include dev dependencies: <code>@11ty/eleventy</code>.</li>
+<li>[ ] Include dev dependencies: <code>nunjucks</code>.</li>
+</ul>
+</li>
+<li>[ ] Run <code>pnpm install</code> to install dependencies.</li>
+</ul>
+<h3>1.2 Configure Eleventy with Nunjucks</h3>
+<ul>
+<li>[ ] Create <code>eleventy.config.js</code> in root. (https://www.11ty.dev/docs/config/)
+<ul>
+<li>[ ] Use ESM instead of CommonJS for modules.</li>
+<li>[ ] Set input folder to <code>src</code>, output folder to <code>_site</code>.</li>
+<li>[ ] Configure <code>markdownTemplateEngine</code>, <code>htmlTemplateEngine</code>, and <code>dataTemplateEngine</code> to <code>njk</code>.</li>
+</ul>
+</li>
+<li>[ ] Create <code>src</code> folder.
+<ul>
+<li>[ ] Add <code>index.njk</code> with a simple &quot;Hello World&quot; message.</li>
+</ul>
+</li>
+<li>[ ] Test locally:
+<ul>
+<li>[ ] <code>pnpm build</code> (builds to <code>_site</code>).</li>
+<li>[ ] <code>pnpm start</code> (serves <code>_site</code>).</li>
+</ul>
+</li>
+</ul>
+<h3>1.3 GitHub Pages Deployment</h3>
+<ul>
+<li>[x] Create <code>.github/workflows/deploy.yml</code>.
+<ul>
+<li>[x] Use Node setup.</li>
+<li>[x] Run <code>pnpm install</code>, <code>pnpm build</code>.</li>
+<li>[x] Deploy <code>_site</code> to <code>gh-pages</code> branch.</li>
+</ul>
+</li>
+<li>[x] Enable GitHub Pages in repo settings.</li>
+<li>[x] Confirm site is published at <code>[username].github.io/[repo-name]</code> or custom domain.</li>
+</ul>
+<hr>
+<h2>2. <strong>Directus CMS Integration</strong></h2>
+<h3>2.1 Directus Setup</h3>
+<ul>
+<li>[ ] Deploy or configure existing Directus instance.</li>
+<li>[ ] Create necessary collections:
+<ol>
+<li><code>blog_posts</code></li>
+<li><code>projects</code></li>
+<li><code>stream_recap</code></li>
+</ol>
+</li>
+<li>[ ] Define fields:
+<ul>
+<li><strong>blog_posts</strong>: title (string), date (datetime), author (string), body (text/rich), tags (json or multiple select), image (file relationship optional)</li>
+<li><strong>projects</strong>: name (string), status (enum: 'launched', 'in development'), description (text), technologies (json or multiple select), problem_solved (text), outcomes_results (text), image (file optional)</li>
+<li><strong>stream_recap</strong>: title (string), date (datetime), youtube_link (string), description (text)</li>
+</ul>
+</li>
+</ul>
+<h3>2.2 API Token</h3>
+<ul>
+<li>[ ] Generate read-only or read/write token in Directus.</li>
+<li>[ ] Store token in <code>.env</code> (never commit <code>.env</code> to version control).</li>
+</ul>
+<h3>2.3 Fetch Data in 11ty</h3>
+<ul>
+<li>[ ] Create <code>_data/directus.js</code>:
+<ul>
+<li>[ ] Read token from <code>.env</code>.</li>
+<li>[ ] Fetch collections (<code>blog_posts</code>, <code>projects</code>, <code>stream_recap</code>).</li>
+<li>[ ] Export an object: <code>{ blogPosts, projects, streamRecap }</code>.</li>
+</ul>
+</li>
+<li>[ ] Implement error handling (try-catch, fallback to empty arrays).</li>
+<li>[ ] Test data fetching:
+<ul>
+<li>[ ] Possibly write a Jest test that mocks fetch calls.</li>
+<li>[ ] Confirm returned data matches expected shapes.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2>3. <strong>Global Layout &amp; Navigation</strong></h2>
+<h3>3.1 Base Layout</h3>
+<ul>
+<li>[ ] Create <code>src/_includes/layouts/base.njk</code>:
+<ul>
+<li>[ ] HTML <code>&lt;head&gt;</code> with meta tags, link to CSS.</li>
+<li>[ ] <code>&lt;header&gt;</code> for site title/logo.</li>
+<li>[ ] <code>&lt;nav&gt;</code> with links to Home, About, Projects, Blog, Live Product Dev, Contact.</li>
+<li>[ ] <code>&lt;footer&gt;</code> with social icons &amp; Plausible script.</li>
+</ul>
+</li>
+</ul>
+<h3>3.2 Responsive Styling</h3>
+<ul>
+<li>[ ] Either set up Tailwind or custom CSS.</li>
+<li>[ ] Confirm <code>&lt;header&gt;</code> and <code>&lt;footer&gt;</code> scale properly on mobile vs. desktop.</li>
+<li>[ ] Add basic resets or global styling if needed.</li>
+</ul>
+<h3>3.3 Test Layout</h3>
+<ul>
+<li>[ ] Create test page (e.g., <code>layout-test.njk</code>) that extends <code>base.njk</code>.</li>
+<li>[ ] Verify nav links work.</li>
+<li>[ ] Check responsive design in browser dev tools.</li>
+</ul>
+<hr>
+<h2>4. <strong>Home Page</strong></h2>
+<h3>4.1 Content Structure</h3>
+<ul>
+<li>[ ] Add <code>src/home.njk</code> or treat <code>index.njk</code> as the homepage.</li>
+<li>[ ] Sections:
+<ol>
+<li>Mission statement</li>
+<li>Brief team intro</li>
+<li>Featured projects</li>
+<li>Optional hero for the latest stream</li>
+</ol>
+</li>
+</ul>
+<h3>4.2 Featured Projects</h3>
+<ul>
+<li>[ ] Fetch from Directus (<code>projects</code>).</li>
+<li>[ ] Show top 3–6 (or filter by a field, e.g., <code>featured = true</code>).</li>
+<li>[ ] Display name, short description, status, link to detail.</li>
+</ul>
+<h3>4.3 Conditional Hero (Latest Stream)</h3>
+<ul>
+<li>[ ] Check if <code>stream_recap</code> has any entries.
+<ul>
+<li>[ ] If yes, show a hero banner with the newest recap.</li>
+<li>[ ] If no, hide the hero.</li>
+</ul>
+</li>
+</ul>
+<h3>4.4 Test</h3>
+<ul>
+<li>[ ] Validate layout, data integrity.</li>
+<li>[ ] Confirm mobile responsiveness.</li>
+</ul>
+<hr>
+<h2>5. <strong>About Page</strong></h2>
+<h3>5.1 Nunjucks Template</h3>
+<ul>
+<li>[ ] Create <code>src/about.njk</code> that extends <code>base.njk</code>.</li>
+<li>[ ] Add inspirational copy about mission and how the studio works.</li>
+</ul>
+<h3>5.2 Optional CMS Integration</h3>
+<ul>
+<li>[ ] If you want dynamic content, create a Directus collection (e.g., <code>about_content</code>).</li>
+<li>[ ] Fetch and display it. Otherwise, keep it static.</li>
+</ul>
+<h3>5.3 Test &amp; Polish</h3>
+<ul>
+<li>[ ] Ensure styling matches brand.</li>
+<li>[ ] Check responsive design.</li>
+</ul>
+<hr>
+<h2>6. <strong>Projects</strong></h2>
+<h3>6.1 Projects Listing Page</h3>
+<ul>
+<li>[ ] Create <code>src/projects.njk</code>.</li>
+<li>[ ] Loop over <code>projects</code> from <code>_data/directus.js</code>.</li>
+<li>[ ] Display a grid or list with minimal details.</li>
+<li>[ ] Link each item to a detail page.</li>
+</ul>
+<h3>6.2 Project Detail</h3>
+<ul>
+<li>[ ] Use a dynamic route or manual approach with Eleventy collections.</li>
+<li>[ ] Fields: name, extended description, technologies, problem_solved, outcomes_results, images.</li>
+<li>[ ] Show a fallback if a field is empty.</li>
+</ul>
+<h3>6.3 Test</h3>
+<ul>
+<li>[ ] Confirm each project is accessible at a nice URL (e.g., <code>/projects/project-name/</code>).</li>
+<li>[ ] Check mobile styling.</li>
+</ul>
+<hr>
+<h2>7. <strong>Blog</strong></h2>
+<h3>7.1 Blog Listing</h3>
+<ul>
+<li>[ ] Create <code>src/blog.njk</code>.</li>
+<li>[ ] Loop over <code>blogPosts</code> from <code>_data/directus.js</code>.</li>
+<li>[ ] Show title, date, excerpt, tags.</li>
+<li>[ ] Provide pagination if desired.</li>
+</ul>
+<h3>7.2 Single Post</h3>
+<ul>
+<li>[ ] Create a template for individual blog posts.</li>
+<li>[ ] Render full <code>body</code> field with Nunjucks.</li>
+<li>[ ] Show author, date, tags, images.</li>
+</ul>
+<h3>7.3 Tag/Category Filters (Optional)</h3>
+<ul>
+<li>[ ] If implementing tag pages, generate them with Eleventy collections.</li>
+<li>[ ] Test logic for filtering.</li>
+</ul>
+<h3>7.4 Test &amp; QA</h3>
+<ul>
+<li>[ ] Check that blog posts appear in order.</li>
+<li>[ ] Validate formatting of body content.</li>
+</ul>
+<hr>
+<h2>8. <strong>Live Product Development</strong></h2>
+<h3>8.1 Page Setup</h3>
+<ul>
+<li>[ ] Create <code>src/live-product-dev.njk</code>.</li>
+<li>[ ] Add embed for Twitch.
+<ul>
+<li>[ ] Show embed if live, fallback link if offline.</li>
+</ul>
+</li>
+<li>[ ] Embed latest YouTube VOD.
+<ul>
+<li>[ ] Link to full YouTube channel.</li>
+</ul>
+</li>
+</ul>
+<h3>8.2 Floating CTA</h3>
+<ul>
+<li>[ ] Global check if stream is live (via serverless or polling an API) and set a flag.</li>
+<li>[ ] If <code>isLive</code> = true, show “Watch Dev Live!” on all pages.
+<ul>
+<li>[ ] Button opens Twitch in new tab.</li>
+</ul>
+</li>
+</ul>
+<h3>8.3 Stream Recap Entries</h3>
+<ul>
+<li>[ ] Fetch from <code>stream_recap</code>.</li>
+<li>[ ] List them on the page.</li>
+<li>[ ] Alternatively, embed them if you have links.</li>
+</ul>
+<h3>8.4 Home Page Hero Integration</h3>
+<ul>
+<li>[ ] If a recap exists, show it on homepage.</li>
+<li>[ ] Hide if none exist.</li>
+</ul>
+<h3>8.5 Test &amp; QA</h3>
+<ul>
+<li>[ ] Manually toggle a live/offline scenario.</li>
+<li>[ ] Confirm CTA appears.</li>
+<li>[ ] Confirm embed works.</li>
+</ul>
+<hr>
+<h2>9. <strong>Contact Page</strong></h2>
+<h3>9.1 Basic Form</h3>
+<ul>
+<li>[ ] Create <code>src/contact.njk</code>.</li>
+<li>[ ] Fields: name, email, phone, company, project description.</li>
+</ul>
+<h3>9.2 Form Handling</h3>
+<ul>
+<li>[ ] For this scope, show a confirmation message on form submit.</li>
+<li>[ ] No advanced back-end integration.</li>
+<li>[ ] Add basic client-side validation.</li>
+</ul>
+<h3>9.3 Test</h3>
+<ul>
+<li>[ ] Ensure all fields are captured.</li>
+<li>[ ] Confirm success/fail states.</li>
+</ul>
+<hr>
+<h2>10. <strong>Analytics (Plausible CE)</strong></h2>
+<h3>10.1 Script Integration</h3>
+<ul>
+<li>[ ] Insert <code>&lt;script&gt;</code> snippet in <code>base.njk</code> or a dedicated partial.</li>
+<li>[ ] Reference your site domain in the script.</li>
+</ul>
+<h3>10.2 Verification</h3>
+<ul>
+<li>[ ] Deploy to GH Pages.</li>
+<li>[ ] Visit site, confirm hits appear in Plausible dashboard.</li>
+</ul>
+<hr>
+<h2>11. <strong>Final Integration &amp; Launch</strong></h2>
+<h3>11.1 Cross-Page Linking</h3>
+<ul>
+<li>[ ] Verify nav links all point to correct pages.</li>
+<li>[ ] Link from homepage to About, Projects, Blog, Contact, etc.</li>
+</ul>
+<h3>11.2 Responsive &amp; Cross-Browser Testing</h3>
+<ul>
+<li>[ ] Check Chrome, Firefox, Safari, Edge.</li>
+<li>[ ] Use responsive dev tools to test phone/tablet breakpoints.</li>
+</ul>
+<h3>11.3 Polish &amp; Bug Fixes</h3>
+<ul>
+<li>[ ] Fix any layout quirks.</li>
+<li>[ ] Ensure brand consistency (colors, typography).</li>
+</ul>
+<h3>11.4 Go Live</h3>
+<ul>
+<li>[ ] Confirm GH Pages domain.</li>
+<li>[ ] If using a custom domain, set DNS + CNAME.</li>
+<li>[ ] Announce launch.</li>
+</ul>
+<hr>
+<h2>Notes &amp; Best Practices</h2>
+<ul>
+<li>Use TDD or incremental testing for each feature.</li>
+<li>Keep commits atomic (one feature/fix per commit).</li>
+<li>Expand or refine tasks as needed.</li>
+</ul>
+<p><strong>End of <code>todo.md</code></strong></p>

@@ -1,0 +1,301 @@
+<p>Below is an updated plan explicitly referencing <strong>Nunjucks</strong> for templating within 11ty. We’ll show how to integrate Nunjucks in each step, ensuring you have a smooth development workflow. The following sections describe:</p>
+<ol>
+<li><strong>Detailed, Step-by-Step Blueprint</strong> (High-Level)</li>
+<li><strong>Iterative Breakdown</strong> (Phases &amp; Micro-Steps)</li>
+<li><strong>Microscopic TDD Chunks</strong> (With example prompts for a code-generation LLM)</li>
+</ol>
+<hr>
+<h2>1. Detailed, Step-by-Step Blueprint (Nunjucks Included)</h2>
+<h3>A. Initial Project Setup</h3>
+<ol>
+<li>
+<p><strong>Initialize Repository</strong></p>
+<ul>
+<li>Create a new GitHub repo (if not done already).</li>
+<li>Clone locally, set up a basic file structure.</li>
+</ul>
+</li>
+<li>
+<p><strong>Configure 11ty with Nunjucks</strong></p>
+<ul>
+<li>Install 11ty and Nunjucks:<pre><code class="language-bash">pnpm install nunjucks
+</code></pre>
+</li>
+<li>Create a minimal <code>.eleventy.js</code> config, specifying Nunjucks as the default template engine for pages and data files if desired.</li>
+</ul>
+</li>
+<li>
+<p><strong>Basic “Hello World”</strong></p>
+<ul>
+<li>Create a <code>src</code> directory (or <code>_pages</code>, whichever you prefer).</li>
+<li>Add an <code>index.njk</code> with a simple “Hello World” message.</li>
+<li>Test build locally.</li>
+</ul>
+</li>
+<li>
+<p><strong>Directus Setup</strong></p>
+<ul>
+<li>Deploy/configure Directus.</li>
+<li>Create collections (<code>blog_posts</code>, <code>projects</code>, <code>stream_recap</code>) with appropriate fields.</li>
+<li>Generate read-only API token.</li>
+</ul>
+</li>
+<li>
+<p><strong>Fetch Data in 11ty</strong></p>
+<ul>
+<li>Create a <code>_data</code> folder.</li>
+<li>Write a <code>.js</code> file (e.g., <code>directus.js</code>) that fetches data from Directus and returns it for use in Nunjucks templates.</li>
+<li>Test by iterating over data in a sample template.</li>
+</ul>
+</li>
+<li>
+<p><strong>Global Layout &amp; Navigation</strong></p>
+<ul>
+<li>Create a <code>layouts</code> folder (e.g., <code>src/_includes/layouts</code>), add a <code>base.njk</code> for shared header, footer, and <code>&lt;main&gt;</code> structure.</li>
+<li>Add site-wide nav (Home, About, Projects, Blog, Live Product Dev, Contact).</li>
+<li>Include social links in the footer, plus the Plausible script.</li>
+</ul>
+</li>
+<li>
+<p><strong>Pages</strong></p>
+<ul>
+<li><strong>Home</strong>: mission statement, team intro, featured projects, optional hero for latest stream VOD if available.</li>
+<li><strong>About</strong>: mission-driven text, how you work.</li>
+<li><strong>Projects</strong>: listing of projects, then detail pages for each.</li>
+<li><strong>Blog</strong>: listing page for posts, single post template.</li>
+<li><strong>Live Product Development</strong>: Twitch embed/fallback, YouTube VOD, floating “Watch Dev Live!” CTA.</li>
+<li><strong>Contact</strong>: form for name/email/phone/company/description, with a confirmation message on submit.</li>
+</ul>
+</li>
+<li>
+<p><strong>Styling &amp; Responsiveness</strong></p>
+<ul>
+<li>Implement styling (e.g., Tailwind) or custom CSS.</li>
+<li>Ensure Nunjucks templates reference the correct CSS.</li>
+</ul>
+</li>
+<li>
+<p><strong>Deploy</strong></p>
+<ul>
+<li>Configure GitHub Pages with a GitHub Actions workflow.</li>
+<li>Confirm successful builds and hosting.</li>
+</ul>
+</li>
+<li>
+<p><strong>Testing</strong></p>
+</li>
+</ol>
+<ul>
+<li>TDD each chunk if possible (especially data fetching, form submission, etc.).</li>
+<li>Manual QA for cross-browser, responsive design, correctness of Nunjucks template rendering.</li>
+</ul>
+<hr>
+<h2>2. Iterative Breakdown (Phases &amp; Micro-Steps)</h2>
+<h3><strong>Phase 1: Core Setup</strong></h3>
+<ol>
+<li><strong>Initialize Project</strong>
+<ul>
+<li><code>git init</code>, <code>.gitignore</code>, <code>package.json</code>.</li>
+</ul>
+</li>
+<li><strong>Install 11ty &amp; Nunjucks</strong>
+<ul>
+<li><code>npm install @11ty/eleventy nunjucks</code>.</li>
+</ul>
+</li>
+<li><strong>Hello World Page</strong>
+<ul>
+<li><code>index.njk</code> in <code>src</code> or <code>pages</code>.</li>
+</ul>
+</li>
+<li><strong>GitHub Actions &amp; Pages</strong>
+<ul>
+<li>Configure CI/CD.</li>
+</ul>
+</li>
+</ol>
+<h3><strong>Phase 2: Directus Integration</strong></h3>
+<ol>
+<li><strong>Create Collections in Directus</strong></li>
+<li><strong>Generate API Token</strong></li>
+<li><strong>Fetch Data in 11ty</strong>
+<ul>
+<li><code>_data/directus.js</code>.</li>
+</ul>
+</li>
+<li><strong>Template Test</strong>
+<ul>
+<li>Test iteration in a small <code>test.njk</code>.</li>
+</ul>
+</li>
+</ol>
+<h3><strong>Phase 3: Global Layout &amp; Navigation</strong></h3>
+<ol>
+<li><strong><code>base.njk</code></strong> Layout</li>
+<li><strong>Navigation (Home, About, Projects, Blog, Live PD, Contact)</strong></li>
+<li><strong>Footer</strong> (social icons, Plausible)</li>
+<li><strong>Responsive CSS</strong></li>
+<li><strong>Test</strong></li>
+</ol>
+<h3><strong>Phase 4: Homepage</strong></h3>
+<ol>
+<li><strong>Mission Statement / Team Intro</strong></li>
+<li><strong>Featured Projects</strong> (fetched from Directus)</li>
+<li><strong>Optional Hero for Latest Stream</strong></li>
+<li><strong>Test &amp; QA</strong></li>
+</ol>
+<h3><strong>Phase 5: About</strong></h3>
+<ol>
+<li><strong>Static or CMS-driven</strong>?
+<ul>
+<li>Possibly <code>about.njk</code> with direct content.</li>
+</ul>
+</li>
+<li><strong>Inspirational Copy</strong></li>
+<li><strong>Test &amp; QA</strong></li>
+</ol>
+<h3><strong>Phase 6: Projects</strong></h3>
+<ol>
+<li><strong>Projects List</strong> (loop over Directus data in <code>projects.njk</code>)</li>
+<li><strong>Project Details</strong> (<code>project-detail.njk</code>)</li>
+<li><strong>Data Fields</strong> (description, images, etc.)</li>
+<li><strong>Test &amp; QA</strong></li>
+</ol>
+<h3><strong>Phase 7: Blog</strong></h3>
+<ol>
+<li><strong>Blog Listing</strong> (<code>blog.njk</code>)</li>
+<li><strong>Single Post Template</strong> (<code>post.njk</code>)</li>
+<li><strong>Tags/Categories</strong></li>
+<li><strong>Test &amp; QA</strong></li>
+</ol>
+<h3><strong>Phase 8: Live Product Development</strong></h3>
+<ol>
+<li><strong>Twitch Embed</strong> (server-side check or fallback)</li>
+<li><strong>YouTube VOD Embed</strong></li>
+<li><strong>Floating CTA</strong></li>
+<li><strong>Stream Recap</strong> entries in Directus</li>
+<li><strong>Test &amp; QA</strong></li>
+</ol>
+<h3><strong>Phase 9: Contact</strong></h3>
+<ol>
+<li><strong>Nunjucks Form Template</strong></li>
+<li><strong>Client-side Validation</strong> (optional)</li>
+<li><strong>Submit Action</strong> (email or success message)</li>
+<li><strong>Test &amp; QA</strong></li>
+</ol>
+<h3><strong>Phase 10: Final Integration &amp; Polish</strong></h3>
+<ol>
+<li><strong>Cross-Page Linking</strong></li>
+<li><strong>Responsive &amp; Browser Testing</strong></li>
+<li><strong>Bug Fixes</strong></li>
+<li><strong>Launch</strong></li>
+</ol>
+<hr>
+<h2>3. Microscopic TDD Chunks &amp; Example Prompts</h2>
+<p>Below are example prompts to feed into a <strong>code-generation LLM</strong> in iterative fashion. Each prompt references and builds upon previous code, ensuring no orphaned logic. We’ll place them in separate code blocks:</p>
+<h3><strong>Prompt Set 1: Phase 1 - Core Setup</strong></h3>
+<details>
+<summary>Prompt 1</summary>
+<pre><code class="language-markdown">**Phase 1 - Step 1: Initialize Project**
+
+You are a code-generation LLM. I have an empty GitHub repository for an Eleventy + Nunjucks project. Please generate:
+1. A minimal `package.json` that includes &quot;@11ty/eleventy&quot; and &quot;nunjucks&quot; as dev dependencies.
+2. A `.gitignore` for Node development (ignore node_modules, .DS_Store, etc.).
+
+Include recommended scripts in `package.json`:
+- &quot;build&quot;: &quot;eleventy&quot;
+- &quot;start&quot;: &quot;eleventy --serve&quot;
+</code></pre>
+</details>
+<details>
+<summary>Prompt 2</summary>
+<pre><code class="language-markdown">**Phase 1 - Step 2: Eleventy Config &amp; Hello World**
+
+Create:
+1. A minimal `.eleventy.js` config that sets:
+   - Input directory: &quot;src&quot;
+   - Output directory: &quot;_site&quot;
+   - `markdownTemplateEngine` and `htmlTemplateEngine` set to &quot;njk&quot; for Nunjucks
+2. A folder named `src` with an `index.njk` that prints &quot;Hello World&quot; in an HTML wrapper (e.g., `&lt;h1&gt;`).
+3. Provide the final code for each file. Confirm we can run &quot;npm run build&quot; and &quot;npm run start&quot;.
+</code></pre>
+</details>
+<details>
+<summary>Prompt 3</summary>
+<pre><code class="language-markdown">**Phase 1 - Step 3: GitHub Actions &amp; GitHub Pages**
+
+Now write a GitHub Actions YAML config (`.github/workflows/deploy.yml`) that:
+- Checks out code
+- Installs dependencies
+- Builds with `npm run build`
+- Deploys `_site` to the `gh-pages` branch
+
+Finally, explain how to enable GitHub Pages from the repo settings to serve from `gh-pages`.
+</code></pre>
+</details>
+<h3><strong>Prompt Set 2: Phase 2 - Directus Integration</strong></h3>
+<details>
+<summary>Prompt 1</summary>
+<pre><code class="language-markdown">**Phase 2 - Step 1: Create Collections in Directus**
+
+I have a Directus instance at `https://directus.example.com`. Provide a migration script (or instructions) that creates these collections:
+
+- blog_posts
+  - title (string)
+  - date (datetime)
+  - author (string)
+  - body (text/rich)
+  - tags (json or multiple select)
+  - image (file relationship optional)
+
+- projects
+  - name (string)
+  - status (enum: 'launched', 'in development')
+  - description (text)
+  - technologies (json or multiple select)
+  - problem_solved (text)
+  - outcomes_results (text)
+  - image (file relationship optional)
+
+- stream_recap
+  - title (string)
+  - date (datetime)
+  - youtube_link (string)
+  - description (text)
+
+Provide a Node script using the Directus JS client or a set of REST calls with cURL. Then show how to run it.
+</code></pre>
+</details>
+<details>
+<summary>Prompt 2</summary>
+<pre><code class="language-markdown">**Phase 2 - Step 2: Generate API Token**
+
+Demonstrate how to generate a read-only API token in Directus. Provide either a code snippet using Directus JS or an example cURL command. I will store this token in a `.env` file (ignored by git). Show me how to do so without exposing secrets in the codebase.
+</code></pre>
+</details>
+<details>
+<summary>Prompt 3</summary>
+<pre><code class="language-markdown">**Phase 2 - Step 3: Eleventy Data Fetch (Nunjucks)**
+
+Create a file `_data/directus.js` in the Eleventy project. It should:
+
+1. Read the API token from `.env`.
+2. Fetch each collection (blog_posts, projects, stream_recap) from Directus.
+3. Return an object like `{ blogPosts: [...], projects: [...], streamRecap: [...] }`.
+4. Handle errors gracefully (log a message, return empty arrays if fetch fails).
+
+Write a simple test with Jest or another framework to mock the fetch calls and ensure we receive arrays of objects. Provide the test file code as well.
+</code></pre>
+</details>
+<h3><strong>Prompt Set 3: Phase 3 - Global Layout &amp; Navigation</strong></h3>
+<p>...and so on, continuing for each phase (Homepage, About, Projects, Blog, Live PD, Contact, etc.), always referencing the code from earlier steps, ensuring incremental development with Nunjucks templates.</p>
+<hr>
+<h2>Conclusion</h2>
+<p>By following this plan:</p>
+<ol>
+<li>You have a <strong>high-level blueprint</strong> outlining all features and structure.</li>
+<li>It’s <strong>iteratively broken down</strong> into small, manageable tasks (Phases &amp; Micro-Steps).</li>
+<li>You have <strong>code-generation prompts</strong> carefully scoped so that each step produces testable, fully integrated code.</li>
+<li><strong>Nunjucks</strong> is established as the template engine throughout the entire flow.</li>
+</ol>
+<p>This approach ensures no big jumps in complexity, no orphaned code, and a straightforward path to <strong>test-driven</strong> Eleventy + Nunjucks + Directus development.</p>
