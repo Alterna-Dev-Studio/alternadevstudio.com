@@ -1,0 +1,35 @@
+---
+layout: base.njk
+---
+<article class="blog-post">
+  <header>
+    <h1>{{ blog_post.title }}</h1>
+    <div class="meta">
+      <time datetime="{{ blog_post.date_published | date('YYYY-MM-DD') }}">
+        {{ blog_post.date_published | date('MMMM D, YYYY') }}
+      </time>
+      <span class="author">by {{ blog_post.author }}</span>
+    </div>
+  </header>
+  
+  {% if blog_post.featured_image %}
+  <div class="featured-image">
+    <img src="{{ blog_post.featured_image }}" alt="{{ blog_post.title }}">
+  </div>
+  {% endif %}
+  
+  <div class="content">
+    {{ blog_post.content | markdown | safe }}
+  </div>
+  
+  {% if blog_post.tags and blog_post.tags.length > 0 %}
+  <div class="tags">
+    <h3>Tags:</h3>
+    <ul>
+      {% for tag in blog_post.tags %}
+      <li>{{ tag }}</li>
+      {% endfor %}
+    </ul>
+  </div>
+  {% endif %}
+</article>

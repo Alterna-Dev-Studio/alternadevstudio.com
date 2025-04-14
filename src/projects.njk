@@ -1,0 +1,32 @@
+---
+layout: base.njk
+title: Projects
+---
+<h1>Projects</h1>
+
+<div class="projects">
+  {% for project in projects %}
+  <article class="project-preview">
+    <h2><a href="/projects/{{ project.slug }}/">{{ project.title }}</a></h2>
+    {% if project.featured_image %}
+    <div class="featured-image">
+      <img src="{{ project.featured_image }}" alt="{{ project.title }}">
+    </div>
+    {% endif %}
+    {% if project.short_description %}
+    <p class="short-description">{{ project.short_description }}</p>
+    {% endif %}
+    {% if project.technologies and project.technologies.length > 0 %}
+    <div class="technologies">
+      <h3>Technologies:</h3>
+      <ul>
+        {% for tech in project.technologies %}
+        <li>{{ tech }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+    {% endif %}
+    <a href="/projects/{{ project.slug }}/" class="view-project">View Project</a>
+  </article>
+  {% endfor %}
+</div>

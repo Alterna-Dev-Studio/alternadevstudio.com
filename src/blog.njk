@@ -1,0 +1,23 @@
+---
+layout: base.njk
+title: Blog Posts
+---
+<h1>Blog Posts</h1>
+
+<div class="blog-posts">
+  {% for post in blog_posts %}
+  <article class="blog-post-preview">
+    <h2><a href="/blog/{{ post.slug }}/">{{ post.title }}</a></h2>
+    <div class="meta">
+      <time datetime="{{ post.date_published | date('YYYY-MM-DD') }}">
+        {{ post.date_published | date('MMMM D, YYYY') }}
+      </time>
+      <span class="author">by {{ post.author }}</span>
+    </div>
+    {% if post.excerpt %}
+    <p class="excerpt">{{ post.excerpt }}</p>
+    {% endif %}
+    <a href="/blog/{{ post.slug }}/" class="read-more">Read More</a>
+  </article>
+  {% endfor %}
+</div>

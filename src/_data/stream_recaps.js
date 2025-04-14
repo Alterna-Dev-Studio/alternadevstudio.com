@@ -13,7 +13,7 @@ import { createDirectusClient, loginToDirectus, isDirectusAvailable } from './ut
  * This is used when Directus is not available
  * @returns {Array} Array of sample stream recaps
  */
-function getSampleStreamRecaps() {
+export function getSampleStreamRecaps() {
   return [
     {
       id: 1,

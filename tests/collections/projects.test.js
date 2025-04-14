@@ -2,6 +2,7 @@
  * Test file for projects collection
  * 
  * This test verifies that the projects collection exists and has the required fields.
+ * It also tests that the sample data can be rendered in templates.
  */
 
 import { 
@@ -11,6 +12,8 @@ import {
   getDirectusConfig
 } from '../utils/directus.js';
 import { projects } from '../../src/directus/collections/index.js';
+import { getSampleProjects } from '../../src/_data/projects.js';
+import { renderTemplate } from '../utils/template.js';
 
 describe('projects Collection', () => {
   let client;
@@ -27,6 +30,17 @@ describe('projects Collection', () => {
     
     // Get token for API calls
     token = client.getToken();
+  });
+  
+  // Sample data for template testing
+  let sampleProjects;
+  
+  beforeAll(() => {
+    // Get sample projects
+    sampleProjects = getSampleProjects();
+    expect(sampleProjects).toBeDefined();
+    expect(Array.isArray(sampleProjects)).toBe(true);
+    expect(sampleProjects.length).toBeGreaterThan(0);
   });
   
   test('Collection exists and is accessible', async () => {
@@ -124,6 +138,82 @@ describe('projects Collection', () => {
       for (const fieldName of expectedFields) {
         const field = fields.find(f => f.field === fieldName);
         expect(field).toBeDefined();
+      }
+    });
+  });
+  
+  describe('Template rendering', () => {
+    test('project.njk template can render each sample project', () => {
+      // Iterate over each sample project
+      for (const project of sampleProjects) {
+        try {
+          // Try to render the template with the project data
+          const html = renderTemplate('project.njk', { project });
+          
+          // Check that the rendered HTML contains key elements
+          expect(html).toContain(project.title);
+          
+          if (project.short_description) {
+            expect(html).toContain(project.short_description);
+          }
+          
+          // If the project has technologies, check that they are rendered
+          if (project.technologies && project.technologies.length > 0) {
+            expect(html).toContain('Technologies Used:');
+            for (const tech of project.technologies) {
+              expect(html).toContain(tech);
+            }
+          }
+          
+          // Check that links are rendered if present
+          if (project.github_url) {
+            expect(html).toContain(project.github_url);
+            expect(html).toContain('GitHub Repository');
+          }
+          
+          if (project.live_url) {
+            expect(html).toContain(project.live_url);
+            expect(html).toContain('Live Demo');
+          }
+          
+          console.log(`Successfully rendered project: ${project.title}`);
+        } catch (error) {
+          console.error(`Error rendering project ${project.title}:`, error);
+          throw error;
+        }
+      }
+    });
+    
+    test('projects.njk template can render the list of projects', () => {
+      try {
+        // Try to render the template with the projects data
+        const html = renderTemplate('projects.njk', { projects: sampleProjects });
+        
+        // Check that the rendered HTML contains key elements
+        expect(html).toContain('Projects');
+        
+        // Check that each project is rendered in the list
+        for (const project of sampleProjects) {
+          expect(html).toContain(project.title);
+          expect(html).toContain(`/projects/${project.slug}/`);
+          
+          if (project.short_description) {
+            expect(html).toContain(project.short_description);
+          }
+          
+          // If the project has technologies, check that they are rendered
+          if (project.technologies && project.technologies.length > 0) {
+            expect(html).toContain('Technologies:');
+            for (const tech of project.technologies) {
+              expect(html).toContain(tech);
+            }
+          }
+        }
+        
+        console.log('Successfully rendered projects list');
+      } catch (error) {
+        console.error('Error rendering projects list:', error);
+        throw error;
       }
     });
   });

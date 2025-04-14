@@ -13,7 +13,7 @@ import { createDirectusClient, loginToDirectus, isDirectusAvailable } from './ut
  * This is used when Directus is not available
  * @returns {Array} Array of sample projects
  */
-function getSampleProjects() {
+export function getSampleProjects() {
   return [
     {
       id: 1,

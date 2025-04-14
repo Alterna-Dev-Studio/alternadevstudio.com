@@ -2,6 +2,7 @@
  * Test file for blog_posts collection
  * 
  * This test verifies that the blog_posts collection exists and has the required fields.
+ * It also tests that the sample data can be rendered in templates.
  */
 
 import { 
@@ -11,6 +12,8 @@ import {
   getDirectusConfig
 } from '../utils/directus.js';
 import { blogPosts } from '../../src/directus/collections/index.js';
+import { getSampleBlogPosts } from '../../src/_data/blog_posts.js';
+import { renderTemplate } from '../utils/template.js';
 
 describe('blog_posts Collection', () => {
   let client;
@@ -27,6 +30,17 @@ describe('blog_posts Collection', () => {
     
     // Get token for API calls
     token = client.getToken();
+  });
+  
+  // Sample data for template testing
+  let sampleBlogPosts;
+  
+  beforeAll(() => {
+    // Get sample blog posts
+    sampleBlogPosts = getSampleBlogPosts();
+    expect(sampleBlogPosts).toBeDefined();
+    expect(Array.isArray(sampleBlogPosts)).toBe(true);
+    expect(sampleBlogPosts.length).toBeGreaterThan(0);
   });
   
   test('Collection exists and is accessible', async () => {
@@ -118,6 +132,60 @@ describe('blog_posts Collection', () => {
       for (const fieldName of expectedFields) {
         const field = fields.find(f => f.field === fieldName);
         expect(field).toBeDefined();
+      }
+    });
+  });
+  
+  describe('Template rendering', () => {
+    test('blog_post.njk template can render each sample blog post', () => {
+      // Iterate over each sample blog post
+      for (const post of sampleBlogPosts) {
+        try {
+          // Try to render the template with the blog post data
+          const html = renderTemplate('blog_post.njk', { blog_post: post });
+          
+          // Check that the rendered HTML contains key elements
+          expect(html).toContain(post.title);
+          expect(html).toContain(post.author);
+          
+          // If the post has tags, check that they are rendered
+          if (post.tags && post.tags.length > 0) {
+            expect(html).toContain('Tags:');
+            for (const tag of post.tags) {
+              expect(html).toContain(tag);
+            }
+          }
+          
+          console.log(`Successfully rendered blog post: ${post.title}`);
+        } catch (error) {
+          console.error(`Error rendering blog post ${post.title}:`, error);
+          throw error;
+        }
+      }
+    });
+    
+    test('blog.njk template can render the list of blog posts', () => {
+      try {
+        // Try to render the template with the blog posts data
+        const html = renderTemplate('blog.njk', { blog_posts: sampleBlogPosts });
+        
+        // Check that the rendered HTML contains key elements
+        expect(html).toContain('Blog Posts');
+        
+        // Check that each blog post is rendered in the list
+        for (const post of sampleBlogPosts) {
+          expect(html).toContain(post.title);
+          expect(html).toContain(`/blog/${post.slug}/`);
+          
+          if (post.excerpt) {
+            expect(html).toContain(post.excerpt);
+          }
+        }
+        
+        console.log('Successfully rendered blog posts list');
+      } catch (error) {
+        console.error('Error rendering blog posts list:', error);
+        throw error;
       }
     });
   });

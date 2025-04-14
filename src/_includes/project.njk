@@ -1,0 +1,63 @@
+---
+layout: base.njk
+---
+<article class="project">
+  <header>
+    <h1>{{ project.title }}</h1>
+    {% if project.date_completed %}
+    <div class="meta">
+      <time datetime="{{ project.date_completed | date('YYYY-MM-DD') }}">
+        Completed: {{ project.date_completed | date('MMMM D, YYYY') }}
+      </time>
+    </div>
+    {% endif %}
+  </header>
+  
+  {% if project.featured_image %}
+  <div class="featured-image">
+    <img src="{{ project.featured_image }}" alt="{{ project.title }}">
+  </div>
+  {% endif %}
+  
+  <div class="short-description">
+    <p>{{ project.short_description }}</p>
+  </div>
+  
+  <div class="content">
+    {{ project.description | markdown | safe }}
+  </div>
+  
+  {% if project.technologies and project.technologies.length > 0 %}
+  <div class="technologies">
+    <h3>Technologies Used:</h3>
+    <ul>
+      {% for tech in project.technologies %}
+      <li>{{ tech }}</li>
+      {% endfor %}
+    </ul>
+  </div>
+  {% endif %}
+  
+  <div class="links">
+    {% if project.github_url %}
+    <a href="{{ project.github_url }}" target="_blank" rel="noopener noreferrer">GitHub Repository</a>
+    {% endif %}
+    
+    {% if project.live_url %}
+    <a href="{{ project.live_url }}" target="_blank" rel="noopener noreferrer">Live Demo</a>
+    {% endif %}
+  </div>
+  
+  {% if project.gallery_images and project.gallery_images.length > 0 %}
+  <div class="gallery">
+    <h3>Gallery:</h3>
+    <div class="image-grid">
+      {% for image in project.gallery_images %}
+      <div class="gallery-item">
+        <img src="{{ image }}" alt="{{ project.title }} - Gallery Image {{ loop.index }}">
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+  {% endif %}
+</article>
