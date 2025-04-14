@@ -11,6 +11,7 @@ echo "Cleaning up Directus environment..."
 
 # Get the directory of this script
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+PROJECT_ROOT="$SCRIPT_DIR/../.."
 cd "$SCRIPT_DIR"
 
 # Stop containers if they are running
@@ -31,6 +32,15 @@ else
   echo "$DIRECTUS_VOLUMES"
   echo "Removing volumes..."
   docker volume rm $DIRECTUS_VOLUMES
+fi
+
+# Remove .env file from project root
+if [ -f "$PROJECT_ROOT/.env" ]; then
+  echo "Removing .env file from project root..."
+  rm "$PROJECT_ROOT/.env"
+  echo ".env file removed."
+else
+  echo "No .env file found in project root."
 fi
 
 echo "Cleanup complete!"
