@@ -53,7 +53,7 @@ pnpm directus:stop
 pnpm directus:clean
 
 # Test connection to Directus
-pnpm directus:test
+pnpm test:directus
 
 # Create sample content in Directus
 pnpm directus:sample-content

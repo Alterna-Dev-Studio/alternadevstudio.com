@@ -72,7 +72,7 @@ pnpm directus:start
 pnpm directus:stop
 
 # Test connection to Directus (runs Jest tests)
-pnpm directus:test
+pnpm test:directus
 
 # Run all tests
 pnpm test
@@ -140,7 +140,7 @@ pnpm test
 pnpm test:watch
 
 # Run only Directus-related tests
-pnpm directus:test
+pnpm test:directus
 ```
 
 The testing framework includes:

@@ -30,7 +30,7 @@ const email = process.env.DIRECTUS_EMAIL || 'admin@example.com';
 const password = process.env.DIRECTUS_PASSWORD || 'change-me-please';
 
 /**
- * Check collection schema to ensure it's compatible with our data
+ * Check collection schema to ensure it exists
  */
 async function checkCollectionSchema(client, collectionName) {
   try {
@@ -55,27 +55,7 @@ async function checkCollectionSchema(client, collectionName) {
       })
     );
     
-    // Check if id field exists and is properly configured
-    const idField = fields.find(field => field.field === 'id');
-    if (!idField) {
-      console.log(`ID field not found in ${collectionName} collection.`);
-      return false;
-    }
-    
-    console.log(`ID field in ${collectionName}:`, idField);
-    
-    // Check if the ID field is an auto-increment integer
-    if (idField.type !== 'integer' || !idField.schema?.has_auto_increment) {
-      console.log(`Warning: ID field in ${collectionName} is not configured as an auto-increment integer.`);
-      console.log(`Type: ${idField.type}, Auto-increment: ${idField.schema?.has_auto_increment}`);
-      
-      if (idField.meta?.special?.includes('uuid')) {
-        console.log(`Warning: ID field has UUID special attribute but is defined as an integer.`);
-        console.log(`This can cause type conflicts when creating items.`);
-      }
-    } else {
-      console.log(`ID field in ${collectionName} is properly configured as an auto-increment integer.`);
-    }
+    console.log(`Collection ${collectionName} exists with ${fields.length} fields.`);
     
     return true;
   } catch (error) {
@@ -280,6 +260,8 @@ In this stream, we explored how to set up Directus as a headless CMS for an Elev
     console.log('You can now view the content in the Directus admin interface:');
     console.log(`${directusUrl}`);
     
+    // Exit successfully
+    process.exit(0);
   } catch (error) {
     console.error('Error creating sample content:');
     console.error('Error message:', error.message);

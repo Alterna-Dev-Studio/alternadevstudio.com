@@ -8,7 +8,7 @@ The recommended way to test the connection is to use the Jest tests:
 
 ```bash
 # Run all Directus tests
-pnpm directus:test
+pnpm test:directus
 
 # Or run all tests
 pnpm test
