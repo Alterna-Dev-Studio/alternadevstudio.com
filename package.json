@@ -14,7 +14,12 @@
     "debug": "cross-env DEBUG=Eleventy* pnpm exec eleventy",
     "debugstart": "cross-env DEBUG=Eleventy* pnpm exec eleventy --serve --quiet",
     "benchmark": "cross-env DEBUG=Eleventy:Benchmark* pnpm exec eleventy",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "setup": "./setup-dev.sh",
+    "directus:setup": "cd tools/directus && ./setup-dev-environment.sh",
+    "directus:start": "cd tools/directus && docker-compose up -d",
+    "directus:stop": "cd tools/directus && docker-compose down",
+    "directus:test": "node tools/directus/test-connection.js"
   },
   "keywords": [],
   "author": "",
@@ -22,7 +27,9 @@
   "packageManager": "pnpm@10.8.0",
   "dependencies": {
     "@11ty/eleventy": "^3.0.0",
+    "@directus/sdk": "^13.0.2",
     "cross-env": "^7.0.3",
+    "dotenv": "^16.3.1",
     "nunjucks": "^3.2.4"
   }
 }
