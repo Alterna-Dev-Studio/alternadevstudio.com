@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "type": "module",
   "scripts": {
+    "clean": "rm -rf _site && mkdir -p _site",
     "build": "pnpm exec eleventy",
     "build-nocolor": "cross-env NODE_DISABLE_COLORS=1 pnpm exec eleventy",
     "build-ghpages": "pnpm exec eleventy --pathprefix=/eleventy-base-blog/",
@@ -20,6 +22,7 @@
   "packageManager": "pnpm@10.8.0",
   "dependencies": {
     "@11ty/eleventy": "^3.0.0",
-    "cross-env": "^7.0.3"
+    "cross-env": "^7.0.3",
+    "nunjucks": "^3.2.4"
   }
 }
