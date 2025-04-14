@@ -3,19 +3,24 @@
  * @returns {ReturnType<import("@11ty/eleventy").configFunction>}
  */
 export default function(eleventyConfig) {
-  // Set Nunjucks as the default template engine for HTML files
+  // Set Nunjucks as the default template engine for HTML and Nunjucks files
   eleventyConfig.setTemplateFormats(["html", "njk", "md"]);
   
+  // Configure Nunjucks as the library for both HTML and Nunjucks files
   eleventyConfig.setLibrary("html", eleventyConfig.nunjucksLibrary);
+  eleventyConfig.setLibrary("njk", eleventyConfig.nunjucksLibrary);
   
   // Optional: Configure Nunjucks for data files if desired
   // This allows using Nunjucks syntax in your JSON/JS data files
+  // Commenting out for now as it's causing issues
+  /*
   eleventyConfig.addDataExtension("njk", {
     parser: async (content, path) => {
       const nunjucks = eleventyConfig.nunjucksLibrary;
       return JSON.parse(nunjucks.renderString(content));
     }
   });
+  */
   
   // Exclude README.md from processing
   eleventyConfig.ignores.add("README.md");
