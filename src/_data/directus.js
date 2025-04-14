@@ -48,20 +48,16 @@ function parseDates(items, dateFields) {
  */
 async function fetchFromDirectus(client, collection, query = {}) {
   try {
-    // Add filter for published status
-    const queryWithStatus = {
-      ...query,
-      filter: {
-        status: {
-          _eq: 'published'
-        },
-        ...(query.filter || {})
-      }
-    };
+    // Log the query for debugging
+    console.log(`Fetching ${collection} with query:`, JSON.stringify(query));
     
-    return await client.request(readItems(collection, queryWithStatus));
+    // Use the query as is, without adding status filter
+    const result = await client.request(readItems(collection, query));
+    console.log(`Successfully fetched ${collection} from Directus:`, result ? `${result.length} items` : 'no items');
+    return result;
   } catch (error) {
-    console.warn(`Failed to fetch ${collection} from Directus:`, error.message);
+    console.error(`Failed to fetch ${collection} from Directus:`, error);
+    // Return sample data as fallback
     return null;
   }
 }
@@ -73,10 +69,15 @@ export default async function() {
   console.log('Directus data file loaded');
   
   // Load sample data
+  console.log('Loading sample data...');
+  const sampleBlogPostsRaw = await loadSampleData('blog_posts.json');
+  console.log('Sample blog posts loaded:', sampleBlogPostsRaw);
+  
   const sampleBlogPosts = parseDates(
-    await loadSampleData('blog_posts.json'), 
+    sampleBlogPostsRaw, 
     ['date_published']
   );
+  console.log('Sample blog posts after date parsing:', sampleBlogPosts);
   
   const sampleProjects = parseDates(
     await loadSampleData('projects.json'), 
@@ -126,10 +127,26 @@ export default async function() {
   ]);
   
   // For each collection, use Directus data if available, otherwise fall back to sample data
+  // If we got a 403 error, we'll use the sample data
+  const useSampleData = !blogPosts || !projects || !streamRecaps;
+  
+  if (useSampleData) {
+    console.log('Using sample data due to permission issues or missing data from Directus.');
+    const returnData = {
+      blog_posts: sampleBlogPosts,
+      projects: sampleProjects,
+      stream_recaps: sampleStreamRecaps,
+      directus_status: 'permission_denied'
+    };
+    console.log('Returning data:', returnData);
+    console.log('blog_posts array length:', returnData.blog_posts.length);
+    return returnData;
+  }
+  
   return {
-    blog_posts: blogPosts || sampleBlogPosts,
-    projects: projects || sampleProjects,
-    stream_recaps: streamRecaps || sampleStreamRecaps,
+    blog_posts: blogPosts,
+    projects: projects,
+    stream_recaps: streamRecaps,
     directus_status: 'connected'
   };
 }
