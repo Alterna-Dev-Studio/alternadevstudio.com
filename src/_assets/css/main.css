@@ -37,3 +37,34 @@
 .text-highlight {
   color: var(--color-highlight);
 }
+
+/* Navigation menu styles */
+nav ul li a {
+  position: relative;
+  font-weight: 500;
+  letter-spacing: 0.025em;
+}
+
+/* Fancy hover effect for menu items */
+nav ul li a::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: 0;
+  left: 50%;
+  background-color: var(--color-secondary);
+  transition: all 0.3s ease-in-out;
+  transform: translateX(-50%);
+  opacity: 0;
+}
+
+nav ul li a:hover::after {
+  width: 70%;
+  opacity: 1;
+}
+
+/* Active page indicator */
+nav ul li a.active {
+  font-weight: 600;
+}
