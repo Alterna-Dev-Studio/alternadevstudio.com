@@ -47,7 +47,7 @@ AlternaDevStudio.com uses a modern JAMstack architecture with the following core
 The project uses Docker Compose for local development of the Directus CMS:
 
 ```
-├── tools/
+├── util/
 │   └── directus/
 │       ├── docker-compose.yml    # Defines Directus, PostgreSQL, and Minio services
 │       ├── setup-dev-environment.sh  # Sets up the development environment
@@ -74,10 +74,10 @@ Key development scripts include:
   "build": "pnpm exec eleventy",
   "start": "pnpm exec eleventy --serve --quiet",
   "test": "NODE_OPTIONS=--experimental-vm-modules pnpm exec jest --detectOpenHandles",
-  "directus:setup": "cd tools/directus && ./setup-dev-environment.sh",
-  "directus:start": "cd tools/directus && docker-compose up -d",
-  "directus:stop": "cd tools/directus && docker-compose down",
-  "directus:clean": "cd tools/directus && ./clean.sh"
+  "directus:setup": "cd util/directus && ./setup-dev-environment.sh",
+  "directus:start": "cd util/directus && docker-compose up -d",
+  "directus:stop": "cd util/directus && docker-compose down",
+  "directus:clean": "cd util/directus && ./clean.sh"
 }
 ```
 
@@ -104,7 +104,7 @@ The project follows a standard 11ty structure with some additions for Directus i
 │   │   ├── projects.test.js
 │   │   └── stream_recap.test.js
 │   └── utils/            # Test utilities
-├── tools/                # Development tools
+├── util/                 # Development tools
 │   └── directus/         # Directus setup and configuration
 ├── _site/                # Generated site (not in version control)
 ├── .env.example          # Example environment variables

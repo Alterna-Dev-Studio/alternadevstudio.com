@@ -272,7 +272,7 @@ function getSampleBlogPosts() {
 
 For more advanced configuration options, refer to:
 - [Directus Documentation](https://docs.directus.io/)
-- The configuration files in the `tools/directus` directory
+- The configuration files in the `util/directus` directory
 
 ## Backup and Restore
 
@@ -280,11 +280,11 @@ To backup or restore your Directus database:
 
 ```bash
 # Create a backup
-cd tools/directus
+cd util/directus
 ./backup-database.sh
 
 # Restore from a backup
-cd tools/directus
+cd util/directus
 ./restore-database.sh
 ```
 
@@ -294,19 +294,19 @@ If you encounter issues with the Directus setup:
 
 1. Check the Docker logs:
    ```bash
-   cd tools/directus
+   cd util/directus
    docker-compose logs directus
    ```
 
 2. Ensure all services are running:
    ```bash
-   cd tools/directus
+   cd util/directus
    docker-compose ps
    ```
 
 3. Try restarting the services:
    ```bash
-   cd tools/directus
+   cd util/directus
    docker-compose restart
    ```
 
@@ -317,7 +317,7 @@ If you encounter issues with the Directus setup:
    pnpm directus:setup
    
    # Option 2: Manual reset
-   cd tools/directus
+   cd util/directus
    docker-compose down -v
    pnpm directus:setup
    ```

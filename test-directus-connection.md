@@ -230,19 +230,19 @@ If you encounter issues:
 
 2. Check Docker container status:
    ```bash
-   cd tools/directus
+   cd util/directus
    docker-compose ps
    ```
 
 3. Check Docker logs:
    ```bash
-   cd tools/directus
+   cd util/directus
    docker-compose logs directus
    ```
 
 4. If needed, reset the environment:
    ```bash
-   cd tools/directus
+   cd util/directus
    docker-compose down -v
    pnpm directus:setup
    ```

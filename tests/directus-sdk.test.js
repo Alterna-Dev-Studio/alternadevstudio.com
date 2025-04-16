@@ -2,7 +2,7 @@
  * Test file for Directus SDK
  * 
  * This test verifies that Directus is running and accessible using the Directus SDK.
- * It's a migration of the tools/directus/test-connection.js script to Jest.
+ * It's a migration of the util/directus/test-connection.js script to Jest.
  */
 
 import { 

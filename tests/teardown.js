@@ -13,7 +13,7 @@ import { dirname } from 'path';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 const rootDir = join(__dirname, '..');
-const directusDir = join(rootDir, 'tools', 'directus');
+const directusDir = join(rootDir, 'util', 'directus');
 
 /**
  * Stop Directus using docker-compose
