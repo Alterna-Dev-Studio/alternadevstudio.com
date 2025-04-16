@@ -17,7 +17,7 @@ The AlternaDevStudio.com website is currently in the early development phase. Th
 ### Completed
 
 - ✅ Project initialization with 11ty and Nunjucks
-- ✅ Directus setup with Docker Compose
+- ✅ Directus configuration setup
 - ✅ Creation of required collections in Directus
 - ✅ Implementation of data fetching from Directus with fallback to sample data
 - ✅ Basic layout and initial pages (Home, About)
@@ -83,9 +83,9 @@ The integration with Directus has been successful, with a robust fallback mechan
 
 The 11ty configuration is working well, with Nunjucks as the templating engine. The project structure follows 11ty conventions with some additions for Directus integration.
 
-### Docker-Based Development
+### External CMS Integration
 
-The use of Docker Compose for Directus, PostgreSQL, and Minio has simplified the local development setup. This approach ensures consistency across development environments.
+The project is configured to interact with an external Directus instance (self-hosted or cloud) rather than running Directus locally. This simplifies the development environment while still allowing for headless CMS capabilities.
 
 ## Current Challenges
 

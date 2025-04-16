@@ -20,8 +20,6 @@
     "test:directus": "pnpm test -- -t 'Directus'",
     "setup": "./setup-dev.sh",
     "directus:setup": "cd tools/directus && ./setup-dev-environment.sh",
-    "directus:start": "cd tools/directus && docker-compose up -d",
-    "directus:stop": "cd tools/directus && docker-compose down",
     "directus:clean": "cd tools/directus && ./clean.sh",
     "directus:sample-content": "pnpm exec node tools/directus/create-sample-content.js",
     "directus:setup-collections": "pnpm exec node src/directus/setup-collections.js"
