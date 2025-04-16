@@ -7,7 +7,7 @@
 # Set script to exit on error
 set -e
 
-# Directus connection details
+# Directus connection details - using DIRECTUS_URL env var with fallback
 DIRECTUS_URL=${DIRECTUS_URL:-http://localhost:8055}
 DIRECTUS_EMAIL=${DIRECTUS_EMAIL:-admin@example.com}
 DIRECTUS_PASSWORD=${DIRECTUS_PASSWORD:-change-me-please}

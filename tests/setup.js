@@ -33,7 +33,7 @@ export default async function setup() {
     while (!isReady && attempts < maxAttempts) {
       try {
         // Try to connect to Directus health endpoint
-        const response = await fetch('http://localhost:8055/server/health');
+        const response = await fetch(`${process.env.DIRECTUS_URL || 'http://localhost:8055'}/server/health`);
         const data = await response.json();
         
         if (data.status === 'ok') {

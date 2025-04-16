@@ -60,7 +60,7 @@ The project uses environment variables for configuration:
 
 | Variable | Description | Default |
 |----------|-------------|---------|
-| `DIRECTUS_URL` | URL of the Directus instance | `http://localhost:8055` |
+| `DIRECTUS_URL` | URL of the Directus instance | `http://localhost:8055` (configurable) |
 | `DIRECTUS_EMAIL` | Admin email for Directus | `admin@example.com` |
 | `DIRECTUS_PASSWORD` | Admin password for Directus | `change-me-please` |
 

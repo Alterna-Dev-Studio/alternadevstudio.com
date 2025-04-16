@@ -55,7 +55,7 @@ This project uses Directus as a headless CMS to manage content. For detailed inf
 
 Once the development environment is set up, you can access the Directus admin interface at:
 
-- **URL**: http://localhost:8055
+- **URL**: The URL defined in DIRECTUS_URL (defaults to http://localhost:8055)
 - **Default Admin Email**: admin@alternadevstudio.com
 - **Default Admin Password**: admin123
 

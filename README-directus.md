@@ -115,7 +115,7 @@ This is useful for testing the integration between Directus and Eleventy without
 ## Accessing Directus
 
 Once Directus is running, you can access it at:
-- **URL**: http://localhost:8055
+- **URL**: The URL defined in DIRECTUS_URL (default: http://localhost:8055)
 - **Default Admin Email**: admin@alternadevstudio.com
 - **Default Admin Password**: admin123
 
@@ -177,7 +177,7 @@ Available environment variables:
 
 | Variable | Description | Default |
 |----------|-------------|---------|
-| `DIRECTUS_URL` | URL of the Directus instance | `http://localhost:8055` |
+| `DIRECTUS_URL` | URL of the Directus instance | `http://localhost:8055` (but should be customized for your environment) |
 | `DIRECTUS_EMAIL` | Admin email for Directus | `admin@alternadevstudio.com` |
 | `DIRECTUS_PASSWORD` | Admin password for Directus | `admin123` |
 | `SITE_URL` | URL of the website | `http://localhost:8080` |
