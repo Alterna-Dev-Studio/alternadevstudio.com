@@ -44,12 +44,12 @@ Checking if required collections exist...
 Collections found:
 - blog_posts: ✅ Found
 - projects: ✅ Found
-- stream_recap: ✅ Found
+- stream_recaps: ✅ Found
 
 Checking for items in collections...
 - blog_posts: 0 items
 - projects: 0 items
-- stream_recap: 0 items
+- stream_recaps: 0 items
 
 Connection test completed successfully!
 
@@ -163,9 +163,9 @@ Expected output (abbreviated):
       }
     },
     {
-      "collection": "stream_recap",
+      "collection": "stream_recaps",
       "meta": {
-        "collection": "stream_recap",
+        "collection": "stream_recaps",
         "icon": "videocam",
         "note": "Recaps of streaming sessions",
         "display_template": "{{title}}",
@@ -185,7 +185,7 @@ Expected output (abbreviated):
         "collapse": "open"
       },
       "schema": {
-        "name": "stream_recap"
+        "name": "stream_recaps"
       }
     }
   ]
@@ -203,8 +203,8 @@ curl -s -X GET ${DIRECTUS_URL}/items/blog_posts \
 curl -s -X GET ${DIRECTUS_URL}/items/projects \
   -H "Authorization: Bearer $TOKEN" | jq
 
-# Check stream_recap
-curl -s -X GET ${DIRECTUS_URL}/items/stream_recap \
+# Check stream_recaps
+curl -s -X GET ${DIRECTUS_URL}/items/stream_recaps \
   -H "Authorization: Bearer $TOKEN" | jq
 ```
 

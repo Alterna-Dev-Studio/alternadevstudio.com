@@ -1,5 +1,5 @@
 {
-  "collection": "stream_recap",
+  "collection": "stream_recaps",
   "meta": {
     "icon": "videocam",
     "note": "Recaps of streaming sessions",
@@ -10,7 +10,7 @@
     "singleton": false
   },
   "schema": {
-    "name": "stream_recap"
+    "name": "stream_recaps"
   },
   "fields": [
     {

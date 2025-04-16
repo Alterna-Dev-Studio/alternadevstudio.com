@@ -102,7 +102,7 @@ The project follows a standard 11ty structure with some additions for Directus i
 │   ├── collections/      # Tests for Directus collections
 │   │   ├── blog_posts.test.js
 │   │   ├── projects.test.js
-│   │   └── stream_recap.test.js
+│   │   └── stream_recaps.test.js
 │   └── utils/            # Test utilities
 ├── util/                 # Development tools
 │   └── directus/         # Directus setup and configuration
@@ -157,7 +157,7 @@ Fields include:
 - sort_order (integer)
 - status (published/draft)
 
-### Stream Recaps (`stream_recap`)
+### Stream Recaps (`stream_recaps`)
 
 Fields include:
 - title (string)

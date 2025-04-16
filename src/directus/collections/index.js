@@ -10,19 +10,19 @@
 
 import blogPostsSchema from './blog_posts.json' assert { type: 'json' };
 import projectsSchema from './projects.json' assert { type: 'json' };
-import streamRecapSchema from './stream_recap.json' assert { type: 'json' };
+import streamRecapsSchema from './stream_recaps.json' assert { type: 'json' };
 import { createCollectionIfNotExists, createAllCollections } from './utils.js';
 
 // Export the collection schemas
 export const blogPosts = blogPostsSchema;
 export const projects = projectsSchema;
-export const streamRecap = streamRecapSchema;
+export const streamRecaps = streamRecapsSchema;
 
 // Export default object with all collections
 export default {
   blogPosts,
   projects,
-  streamRecap
+  streamRecaps
 };
 
 // Export utility functions

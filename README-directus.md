@@ -58,6 +58,9 @@ pnpm test:directus
 # Create sample content in Directus
 pnpm directus:sample-content
 
+# Set up or update collections in Directus
+pnpm directus:setup-collections
+
 # Set up Minio for S3 storage with automated configuration
 pnpm directus:minio-setup
 ```
@@ -102,6 +105,25 @@ The test script will check:
 - How many items are in each collection
 
 For detailed information about testing the connection, see [test-directus-connection.md](test-directus-connection.md).
+
+### Setting Up Collections
+
+The `directus:setup-collections` script creates or updates collections in Directus according to the schema definitions in `src/directus/collections/`.
+
+Key features:
+- Creates new collections if they don't exist
+- For existing collections, adds any missing fields while preserving existing ones
+- Preserves any custom fields that may have been added to collections beyond the schema definition
+- Can be run multiple times safely without duplicating or overwriting data
+
+You can test what changes would be made without actually applying them:
+
+```bash
+# Dry run - show what changes would be made without applying them
+pnpm exec node src/directus/setup-collections.js -- --dry-run
+```
+
+This is useful when updating schema definitions to see what new fields would be added.
 
 ### Creating Sample Content
 
@@ -150,7 +172,7 @@ Fields include:
 - Sort order
 - Gallery images
 
-### Stream Recaps (`stream_recap`)
+### Stream Recaps (`stream_recaps`)
 Fields include:
 - Title
 - Slug

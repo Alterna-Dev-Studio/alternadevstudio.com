@@ -13,7 +13,7 @@ DIRECTUS_EMAIL=${DIRECTUS_EMAIL:-admin@example.com}
 DIRECTUS_PASSWORD=${DIRECTUS_PASSWORD:-change-me-please}
 
 # Required collections
-COLLECTIONS=("blog_posts" "projects" "stream_recap")
+COLLECTIONS=("blog_posts" "projects" "stream_recaps")
 
 echo "Testing connection to Directus..."
 echo "URL: $DIRECTUS_URL"
