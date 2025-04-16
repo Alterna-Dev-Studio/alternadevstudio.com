@@ -1,8 +1,7 @@
 /**
  * Global setup for Jest tests
  * 
- * This file is responsible for starting Directus before the tests run.
- * It uses docker-compose to start the Directus services in the background.
+ * This file is responsible for verifying Directus is available before tests run.
  * It also sets up the collections using the shared module.
  */
 
@@ -19,20 +18,14 @@ const rootDir = join(__dirname, '..');
 const directusDir = join(rootDir, 'util', 'directus');
 
 /**
- * Start Directus using docker-compose
+ * Verify Directus is available for tests
  */
 export default async function setup() {
-  console.log('Starting Directus for tests...');
+  console.log('Verifying Directus availability for tests...');
   
   try {
-    // Start Directus using docker-compose
-    execSync('docker-compose up -d', {
-      cwd: directusDir,
-      stdio: 'inherit'
-    });
-    
     // Wait for Directus to be ready (30 seconds max)
-    console.log('Waiting for Directus to be ready...');
+    console.log('Checking if Directus is ready...');
     let isReady = false;
     let attempts = 0;
     const maxAttempts = 30;
@@ -76,7 +69,7 @@ export default async function setup() {
     global.__DIRECTUS_RUNNING__ = true;
     
   } catch (error) {
-    console.error('Error starting Directus:', error.message);
+    console.error('Error verifying Directus availability:', error.message);
     process.exit(1);
   }
 }

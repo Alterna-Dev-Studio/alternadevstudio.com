@@ -1,8 +1,7 @@
 /**
  * Global teardown for Jest tests
  * 
- * This file is responsible for stopping Directus after the tests run.
- * It uses docker-compose to stop the Directus services.
+ * This file is responsible for cleaning up after tests have completed.
  */
 
 import { execSync } from 'child_process';
@@ -16,31 +15,16 @@ const rootDir = join(__dirname, '..');
 const directusDir = join(rootDir, 'util', 'directus');
 
 /**
- * Stop Directus using docker-compose
+ * Clean up after tests
  */
 export default async function teardown() {
-  // Only stop Directus if it was started by the setup
+  // Reset the global flag that was set during setup
   if (global.__DIRECTUS_RUNNING__) {
-    console.log('Stopping Directus...');
+    console.log('Cleaning up after tests...');
     
-    try {
-      // Stop Directus using docker-compose
-      execSync('docker-compose down', {
-        cwd: directusDir,
-        stdio: 'inherit'
-      });
-      
-      console.log('Directus stopped successfully');
-      
-      // Reset global variable
-      global.__DIRECTUS_RUNNING__ = false;
-      
-      // Force process to exit immediately to ensure all resources are released
-      process.exit(0);
-      
-    } catch (error) {
-      console.error('Error stopping Directus:', error.message);
-      process.exit(1);
-    }
+    // Reset global variable
+    global.__DIRECTUS_RUNNING__ = false;
+    
+    console.log('Test cleanup completed');
   }
 }
