@@ -62,15 +62,23 @@ export async function addMissingFields(client, collectionName, definedFields) {
     missingFields.forEach(field => console.log(` - ${field.field}`));
     
     // Add each missing field
+    const errors = [];
     for (const field of missingFields) {
       try {
         await client.request(createField(collectionName, field));
         console.log(`Added field ${field.field} to ${collectionName}`);
       } catch (error) {
         console.error(`Error adding field ${field.field} to ${collectionName}:`, error.message);
-        return false;
+        errors.push({ field: field.field, error: error.message });
       }
     }
+    
+    if (errors.length > 0) {
+      console.error(`Failed to add the following fields to ${collectionName}:`, errors);
+      return false;
+    }
+    
+    return true;
     
     return true;
   } catch (error) {
