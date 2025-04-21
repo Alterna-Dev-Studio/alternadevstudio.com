@@ -1,0 +1,78 @@
+---
+pagination:
+  data: stream_pages
+  size: 1
+  alias: stream_page
+permalink: "{{ stream_page.permalink }}"
+eleventyComputed:
+  title: "{{ stream_page.title }}"
+---
+<article class="stream-recap">
+  <header>
+    <h1>{{ stream_page.title }}</h1>
+    <div class="meta">
+      <time datetime="{{ stream_page.stream_date | date('YYYY-MM-DD') }}">
+        Streamed: {{ stream_page.stream_date | date('MMMM D YYYY') }}
+      </time>
+      {% if stream_page.duration_minutes %}
+      <span class="duration">{{ stream_page.duration_minutes }} minutes</span>
+      {% endif %}
+    </div>
+  </header>
+
+  {% if stream_page.thumbnail %}
+  <div class="thumbnail">
+    <img src="{{ stream_page.thumbnail }}" alt="{{ stream_page.title }}">
+  </div>
+  {% endif %}
+
+  {% if stream_page.video_url %}
+  <div class="video">
+    <a href="{{ stream_page.video_url }}" target="_blank" rel="noopener noreferrer">
+      Watch the Stream Recording
+    </a>
+  </div>
+  {% endif %}
+
+  <div class="summary">
+    {{ stream_page.summary | markdown | safe }}
+  </div>
+
+  {% if stream_page.topics_covered and stream_page.topics_covered.length > 0 %}
+  <div class="topics">
+    <h3>Topics Covered:</h3>
+    <ul>
+      {% for topic in stream_page.topics_covered %}
+      <li>{{ topic }}</li>
+      {% endfor %}
+    </ul>
+  </div>
+  {% endif %}
+
+  {% if stream_page.code_repository %}
+  <div class="code-repository">
+    <h3>Code Repository:</h3>
+    <a href="{{ stream_page.code_repository }}" target="_blank" rel="noopener noreferrer">
+      {{ stream_page.code_repository }}
+    </a>
+  </div>
+  {% endif %}
+
+  {% if stream_page.resources and stream_page.resources.length > 0 %}
+  <div class="resources">
+    <h3>Resources:</h3>
+    <ul>
+      {% for resource in stream_page.resources %}
+      <li>
+        <a href="{{ resource.url }}" target="_blank" rel="noopener noreferrer">
+          {{ resource.title }}
+        </a>
+        {% if resource.description %}
+        <p>{{ resource.description }}</p>
+        {% endif %}
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+  {% endif %}
+</article>
