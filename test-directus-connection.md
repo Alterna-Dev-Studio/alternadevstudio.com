@@ -30,7 +30,7 @@ If everything is working correctly, you should see output similar to:
 
 ```
 Testing connection to Directus...
-URL: http://localhost:8055
+URL: ${DIRECTUS_URL}
 Email: admin@alternadevstudio.com
 
 Checking if Directus is running...
@@ -44,18 +44,18 @@ Checking if required collections exist...
 Collections found:
 - blog_posts: ✅ Found
 - projects: ✅ Found
-- stream_recap: ✅ Found
+- stream_recaps: ✅ Found
 
 Checking for items in collections...
 - blog_posts: 0 items
 - projects: 0 items
-- stream_recap: 0 items
+- stream_recaps: 0 items
 
 Connection test completed successfully!
 
 You can now use Directus as a headless CMS for your website.
 Access the admin interface at:
-http://localhost:8055
+${DIRECTUS_URL}
 ```
 
 ## Manual Testing with curl
@@ -65,7 +65,7 @@ If you prefer to test the connection manually, you can use curl commands:
 ### 1. Check if Directus is running
 
 ```bash
-curl -s http://localhost:8055/server/health | jq
+curl -s ${DIRECTUS_URL}/server/health | jq
 ```
 
 Expected output:
@@ -78,7 +78,7 @@ Expected output:
 ### 2. Get an authentication token
 
 ```bash
-curl -s -X POST http://localhost:8055/auth/login \
+curl -s -X POST ${DIRECTUS_URL}/auth/login \
   -H "Content-Type: application/json" \
   -d '{"email":"admin@alternadevstudio.com","password":"admin123"}' | jq
 ```
@@ -102,7 +102,7 @@ export TOKEN="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
 ### 3. List collections
 
 ```bash
-curl -s -X GET http://localhost:8055/collections \
+curl -s -X GET ${DIRECTUS_URL}/collections \
   -H "Authorization: Bearer $TOKEN" | jq
 ```
 
@@ -163,9 +163,9 @@ Expected output (abbreviated):
       }
     },
     {
-      "collection": "stream_recap",
+      "collection": "stream_recaps",
       "meta": {
-        "collection": "stream_recap",
+        "collection": "stream_recaps",
         "icon": "videocam",
         "note": "Recaps of streaming sessions",
         "display_template": "{{title}}",
@@ -185,7 +185,7 @@ Expected output (abbreviated):
         "collapse": "open"
       },
       "schema": {
-        "name": "stream_recap"
+        "name": "stream_recaps"
       }
     }
   ]
@@ -196,15 +196,15 @@ Expected output (abbreviated):
 
 ```bash
 # Check blog_posts
-curl -s -X GET http://localhost:8055/items/blog_posts \
+curl -s -X GET ${DIRECTUS_URL}/items/blog_posts \
   -H "Authorization: Bearer $TOKEN" | jq
 
 # Check projects
-curl -s -X GET http://localhost:8055/items/projects \
+curl -s -X GET ${DIRECTUS_URL}/items/projects \
   -H "Authorization: Bearer $TOKEN" | jq
 
-# Check stream_recap
-curl -s -X GET http://localhost:8055/items/stream_recap \
+# Check stream_recaps
+curl -s -X GET ${DIRECTUS_URL}/items/stream_recaps \
   -H "Authorization: Bearer $TOKEN" | jq
 ```
 
@@ -230,19 +230,19 @@ If you encounter issues:
 
 2. Check Docker container status:
    ```bash
-   cd tools/directus
+   cd util/directus
    docker-compose ps
    ```
 
 3. Check Docker logs:
    ```bash
-   cd tools/directus
+   cd util/directus
    docker-compose logs directus
    ```
 
 4. If needed, reset the environment:
    ```bash
-   cd tools/directus
+   cd util/directus
    docker-compose down -v
    pnpm directus:setup
    ```

@@ -101,7 +101,7 @@ async function createSampleContent() {
     // Check collection schemas
     await checkCollectionSchema(client, 'blog_posts');
     await checkCollectionSchema(client, 'projects');
-    await checkCollectionSchema(client, 'stream_recap');
+    await checkCollectionSchema(client, 'stream_recaps');
     console.log('');
     
     // Create a sample blog post
@@ -205,7 +205,7 @@ This is the website you're currently viewing! It's built with Eleventy and uses 
     try {
       console.log('Creating a sample stream recap...');
       const streamRecap = await client.request(
-        createItem('stream_recap', {
+        createItem('stream_recaps', {
           // Don't include ID field, let Directus auto-generate it
           status: 'published',
           title: 'Setting Up Directus with Eleventy',

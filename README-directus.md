@@ -58,6 +58,9 @@ pnpm test:directus
 # Create sample content in Directus
 pnpm directus:sample-content
 
+# Set up or update collections in Directus
+pnpm directus:setup-collections
+
 # Set up Minio for S3 storage with automated configuration
 pnpm directus:minio-setup
 ```
@@ -103,6 +106,25 @@ The test script will check:
 
 For detailed information about testing the connection, see [test-directus-connection.md](test-directus-connection.md).
 
+### Setting Up Collections
+
+The `directus:setup-collections` script creates or updates collections in Directus according to the schema definitions in `src/directus/collections/`.
+
+Key features:
+- Creates new collections if they don't exist
+- For existing collections, adds any missing fields while preserving existing ones
+- Preserves any custom fields that may have been added to collections beyond the schema definition
+- Can be run multiple times safely without duplicating or overwriting data
+
+You can test what changes would be made without actually applying them:
+
+```bash
+# Dry run - show what changes would be made without applying them
+pnpm exec node src/directus/setup-collections.js -- --dry-run
+```
+
+This is useful when updating schema definitions to see what new fields would be added.
+
 ### Creating Sample Content
 
 The sample content script will create:
@@ -115,7 +137,7 @@ This is useful for testing the integration between Directus and Eleventy without
 ## Accessing Directus
 
 Once Directus is running, you can access it at:
-- **URL**: http://localhost:8055
+- **URL**: The URL defined in DIRECTUS_URL (default: http://localhost:8055)
 - **Default Admin Email**: admin@alternadevstudio.com
 - **Default Admin Password**: admin123
 
@@ -150,7 +172,7 @@ Fields include:
 - Sort order
 - Gallery images
 
-### Stream Recaps (`stream_recap`)
+### Stream Recaps (`stream_recaps`)
 Fields include:
 - Title
 - Slug
@@ -177,7 +199,7 @@ Available environment variables:
 
 | Variable | Description | Default |
 |----------|-------------|---------|
-| `DIRECTUS_URL` | URL of the Directus instance | `http://localhost:8055` |
+| `DIRECTUS_URL` | URL of the Directus instance | `http://localhost:8055` (but should be customized for your environment) |
 | `DIRECTUS_EMAIL` | Admin email for Directus | `admin@alternadevstudio.com` |
 | `DIRECTUS_PASSWORD` | Admin password for Directus | `admin123` |
 | `SITE_URL` | URL of the website | `http://localhost:8080` |
@@ -272,7 +294,7 @@ function getSampleBlogPosts() {
 
 For more advanced configuration options, refer to:
 - [Directus Documentation](https://docs.directus.io/)
-- The configuration files in the `tools/directus` directory
+- The configuration files in the `util/directus` directory
 
 ## Backup and Restore
 
@@ -280,11 +302,11 @@ To backup or restore your Directus database:
 
 ```bash
 # Create a backup
-cd tools/directus
+cd util/directus
 ./backup-database.sh
 
 # Restore from a backup
-cd tools/directus
+cd util/directus
 ./restore-database.sh
 ```
 
@@ -294,19 +316,19 @@ If you encounter issues with the Directus setup:
 
 1. Check the Docker logs:
    ```bash
-   cd tools/directus
+   cd util/directus
    docker-compose logs directus
    ```
 
 2. Ensure all services are running:
    ```bash
-   cd tools/directus
+   cd util/directus
    docker-compose ps
    ```
 
 3. Try restarting the services:
    ```bash
-   cd tools/directus
+   cd util/directus
    docker-compose restart
    ```
 
@@ -317,7 +339,7 @@ If you encounter issues with the Directus setup:
    pnpm directus:setup
    
    # Option 2: Manual reset
-   cd tools/directus
+   cd util/directus
    docker-compose down -v
    pnpm directus:setup
    ```

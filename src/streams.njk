@@ -1,12 +1,13 @@
 ---
 layout: base.njk
 title: Stream Recaps
+permalink: "/streams/"
 ---
 <h1>Stream Recaps</h1>
 
 <div class="stream-recaps">
-  {% if stream_recaps.length > 0 %}
-    {% for recap in stream_recaps %}
+  {% if stream_pages.length > 0 %}
+    {% for recap in stream_pages %}
     <article class="stream-recap-preview">
       <h2><a href="/streams/{{ recap.slug }}/">{{ recap.title }}</a></h2>
       <div class="meta">

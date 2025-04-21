@@ -5,7 +5,7 @@
  * and in tests to ensure collections are properly configured.
  */
 
-import { createDirectus, rest, authentication, readItems } from '@directus/sdk';
+import { createDirectus, rest, authentication, readItems, readFields, createField } from '@directus/sdk';
 import { config } from 'dotenv';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
@@ -83,6 +83,19 @@ export async function setupCollections(options = {}) {
 
 // If this script is run directly, execute the setup
 if (import.meta.url === `file://${process.argv[1]}`) {
+  // Check for command line arguments
+  const args = process.argv.slice(2);
+  const dryRun = args.includes('--dry-run');
+  
+  if (dryRun) {
+    console.log('DRY RUN MODE: No changes will be made to Directus');
+    console.log('The following collections would be created or updated:');
+    Object.values(collections).forEach(collection => {
+      console.log(`- ${collection.collection} (${collection.fields.length} fields)`);
+    });
+    process.exit(0);
+  }
+  
   setupCollections()
     .then(success => {
       if (success) {

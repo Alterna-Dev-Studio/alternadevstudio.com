@@ -34,10 +34,9 @@ Directus serves as the headless CMS with these key collections:
 - **Projects**: Showcase of completed and in-progress work
 - **Stream Recaps**: Summaries of live development streams
 
-The Directus setup includes:
-- PostgreSQL database for content storage
-- Minio for S3-compatible file storage
-- Docker Compose for local development
+The Directus integration relies on:
+- Connecting to an existing Directus instance (self-hosted or cloud)
+- Directus SDK for content fetching
 
 ### 3. Data Flow Pattern
 

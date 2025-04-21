@@ -1,7 +1,7 @@
 /**
- * Test file for stream_recap collection
+ * Test file for stream_recaps collection
  * 
- * This test verifies that the stream_recap collection exists and has the required fields.
+ * This test verifies that the stream_recaps collection exists and has the required fields.
  * It also tests that the sample data can be rendered in templates.
  */
 
@@ -11,11 +11,11 @@ import {
   getItems,
   getDirectusConfig
 } from '../utils/directus.js';
-import { streamRecap } from '../../src/directus/collections/index.js';
+import { streamRecaps } from '../../src/directus/collections/index.js';
 import { getSampleStreamRecaps } from '../../src/_data/stream_recaps.js';
 import { renderTemplate } from '../utils/template.js';
 
-describe('stream_recap Collection', () => {
+describe('stream_recaps Collection', () => {
   let client;
   let token;
   const { url } = getDirectusConfig();
@@ -46,13 +46,13 @@ describe('stream_recap Collection', () => {
   test('Collection exists and is accessible', async () => {
     try {
       // Try to get items from the collection (limit 1)
-      const items = await getItems(client, 'stream_recap', { limit: 1 });
+      const items = await getItems(client, 'stream_recaps', { limit: 1 });
       
       // Check that we got an array
       expect(Array.isArray(items)).toBe(true);
       
       // Get the total count using the API directly
-      const response = await fetch(`${url}/items/stream_recap?limit=1`, {
+      const response = await fetch(`${url}/items/stream_recaps?limit=1`, {
         headers: {
           'Authorization': `Bearer ${token}`
         }
@@ -62,14 +62,14 @@ describe('stream_recap Collection', () => {
       
       // Log the number of items
       if (data.meta && data.meta.total_count !== undefined) {
-        console.log(`Collection stream_recap: ${data.meta.total_count} items`);
+        console.log(`Collection stream_recaps: ${data.meta.total_count} items`);
       } else {
-        console.log(`Collection stream_recap: exists (no meta information available)`);
+        console.log(`Collection stream_recaps: exists (no meta information available)`);
       }
       
     } catch (error) {
       // Fail the test if there's an error
-      console.error(`Error accessing collection stream_recap: ${error.message}`);
+      console.error(`Error accessing collection stream_recaps: ${error.message}`);
       throw error;
     }
   });
@@ -79,7 +79,7 @@ describe('stream_recap Collection', () => {
     
     beforeAll(async () => {
       // Get the expected fields from the collection definition
-      fields = streamRecap.fields.map(field => ({
+      fields = streamRecaps.fields.map(field => ({
         field: field.field,
         type: field.type
       }));
@@ -114,7 +114,7 @@ describe('stream_recap Collection', () => {
     
     test('has all expected fields', () => {
       // Get the expected fields from the collection definition
-      const expectedFields = streamRecap.fields.map(field => field.field);
+      const expectedFields = streamRecaps.fields.map(field => field.field);
       
       // Check that all expected fields are present
       for (const fieldName of expectedFields) {
