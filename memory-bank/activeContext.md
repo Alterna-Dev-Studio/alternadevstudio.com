@@ -22,6 +22,8 @@ The AlternaDevStudio.com website is currently in the early development phase. Th
 - ✅ Implementation of data fetching from Directus with fallback to sample data
 - ✅ Basic layout and initial pages (Home, About)
 - ✅ Testing infrastructure with Jest
+- ✅ Merged includes into layouts folder to simplify directory structure
+- ✅ Added Makefile to simplify development workflow and environment management
 
 ### In Progress
 
@@ -40,12 +42,20 @@ Based on the todo.md file, the following tasks are next in the pipeline:
 4. **Implement the Blog section**: Create the blog listing page and individual blog post pages.
 5. **Build the Live Product Development page**: Implement Twitch and YouTube integrations.
 6. **Create the Contact page**: Implement the consultation request form.
+7. **Implement accessibility standards**: Ensure the site follows WCAG 2.1 AA standards and research an Eleventy accessibility plugin to automate accessibility checks.
 
 ## Active Decisions and Considerations
 
 ### Styling Approach
 
-A decision needs to be made on whether to use Tailwind CSS or a custom CSS approach for styling. The todo.md file mentions "Either set up Tailwind or custom CSS."
+We have implemented Tailwind CSS for styling the site. The setup includes:
+
+- Tailwind CSS v4.1.4 with PostCSS for processing
+- Custom color palette defined in tailwind.config.js (primary, secondary, accent, highlight)
+- CSS variables for custom colors in src/_assets/css/main.css
+- Responsive design patterns using Tailwind's utility classes
+
+The implementation follows a utility-first approach, with custom CSS added only when necessary. The custom color palette is based on the design style guidelines from the product context document.
 
 ### Content Rendering
 
@@ -62,6 +72,17 @@ The specification calls for integration with Twitch and YouTube. A decision need
 - **ES Modules**: The project uses ES Modules (type: "module" in package.json)
 - **Data Files**: Data fetching logic is isolated in dedicated files in `src/_data/`
 - **Utility Functions**: Common functionality is extracted to utility files
+
+### Development Workflow
+
+- **Makefile**: The project includes a streamlined Makefile with essential targets
+  - `make dev`: Start both Directus and the development server
+  - `make shutdown`: Stop both Directus and the development server
+  - `make reset`: Reset the entire development environment
+  - `make build`: Build the site for production
+  - `make clean`: Clean the build directory
+  - `make test`: Run all tests
+- **pnpm Scripts**: All npm scripts use pnpm as the package manager
 
 ### Error Handling
 
@@ -93,3 +114,4 @@ The project is configured to interact with an external Directus instance (self-h
 2. **Content Rendering**: A solution is needed for rendering rich text content from Directus.
 3. **Streaming Integration**: The integration with Twitch and YouTube needs to be implemented.
 4. **Form Handling**: The contact form needs to be implemented with validation and submission handling.
+5. **Accessibility Compliance**: Ensuring the site meets WCAG 2.1 AA standards for accessibility, including keyboard navigation, screen reader compatibility, sufficient color contrast, dyslexia-friendly typography and layouts, and color-blind friendly color schemes.

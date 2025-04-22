@@ -3,9 +3,70 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="{{ description | default('Alterna Development Studio - Building better products with our live development process') }}">
   <title>{{ title | default("Alterna Development Studio") }}</title>
+  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="icon" type="image/svg+xml" href="/_assets/alterna_icon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/_assets/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/_assets/favicon-16x16.png">
+  <link rel="shortcut icon" href="/_assets/favicon.ico">
 </head>
 <body>
-  {{ content | safe }}
+  <header>
+    <div class="site-header">
+      <a href="/" class="site-logo">
+        <img src="/_assets/alternadev_logo_full.svg" alt="Alterna Dev Studio" width="200" height="40">
+      </a>
+      <button class="menu-toggle" id="menu-toggle" aria-label="Toggle menu">☰</button>
+      <nav id="main-nav" class="mobile-hidden">
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/about/">About</a></li>
+          <li><a href="/projects/">Projects</a></li>
+          <li><a href="/refactoring/">Scale Your Product</a></li>
+          <li><a href="/blog/">Blog</a></li>
+          <li><a href="/streams/">Live Dev</a></li>
+          <li><a href="/contact/" class="btn">Get in Touch</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+      {{ content | safe }}
+    </div>
+  </main>
+
+  <footer>
+    <div class="site-footer">
+      <div class="footer-brand">
+        <img src="/_assets/alterna_icon.svg" alt="Alterna Dev Studio Icon" width="40" height="40" class="footer-logo">
+        <div class="copyright">
+          &copy; {{ "" | date("YYYY") }} Alterna Development Studio. All rights reserved.
+        </div>
+      </div>
+      <div class="social-links">
+        <a href="https://github.com/" target="_blank" rel="noopener noreferrer" aria-label="GitHub">GitHub</a>
+        <a href="https://youtube.com/" target="_blank" rel="noopener noreferrer" aria-label="YouTube">YouTube</a>
+        <a href="https://twitch.tv/" target="_blank" rel="noopener noreferrer" aria-label="Twitch">Twitch</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Basic mobile menu toggle
+    document.addEventListener('DOMContentLoaded', function() {
+      const menuToggle = document.getElementById('menu-toggle');
+      const mainNav = document.getElementById('main-nav');
+      
+      if (menuToggle && mainNav) {
+        menuToggle.addEventListener('click', function() {
+          mainNav.classList.toggle('mobile-hidden');
+          mainNav.classList.toggle('mobile-visible');
+        });
+      }
+    });
+  </script>
 </body>
 </html>

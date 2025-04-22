@@ -16,23 +16,55 @@ This is the source code for the AlternaDevStudio.com website, built with Elevent
 - Node.js (v16 or later)
 - pnpm (v7 or later)
 - Docker and Docker Compose (for Directus)
+- GNU Make (for using the Makefile)
 
-### Quick Start
+### Quick Start with Make
 
-The easiest way to get started is to run the setup script:
+The easiest way to get started is to use the provided Makefile:
 
 ```bash
-# Install dependencies and set up the development environment
-pnpm setup
+# Set up the complete development environment
+make setup
+
+# Start both Directus and the development server
+make dev
 ```
 
-This script will:
+This will:
 1. Install dependencies
 2. Set up Directus with Docker Compose
 3. Create the required collections in Directus
-4. Start the development server
+4. Create sample content
+5. Start both Directus and the development server
 
-### Manual Setup
+### Using the Makefile
+
+The Makefile provides essential targets to simplify managing the development environment:
+
+```bash
+# Show available targets
+make help
+
+# Start both Directus and the development server
+make dev
+
+# Stop both Directus and the development server
+make shutdown
+
+# Reset the entire development environment
+make reset
+
+# Build the site for production
+make build
+
+# Clean the build directory
+make clean
+
+# Run all tests
+make test
+```
+
+### Manual Setup (without Make)
 
 If you prefer to set up the environment manually:
 
@@ -117,6 +149,27 @@ For detailed information about testing the connection to Directus, see [test-dir
 
 ## Development
 
+### Using Make
+
+```bash
+# Start both Directus and the development server
+make dev
+
+# Stop both Directus and the development server
+make shutdown
+
+# Reset the entire development environment
+make reset
+
+# Build the site for production
+make build
+
+# Run all tests
+make test
+```
+
+### Using pnpm directly
+
 ```bash
 # Start the development server in the background
 pnpm start
@@ -134,11 +187,20 @@ pnpm build
 pnpm clean
 ```
 
-> **Note**: The development server commands are configured to run in the background automatically. This allows you to continue using the terminal while the server is running. When you're done, use `pnpm eleventy:shutdown` to stop the server.
+> **Note**: The development server commands are configured to run in the background automatically. This allows you to continue using the terminal while the server is running. When you're done, use `make stop` or `pnpm eleventy:shutdown` to stop the server.
 
 ## Testing
 
 This project uses Jest for testing. The tests are located in the `tests` directory.
+
+### Using Make
+
+```bash
+# Run all tests
+make test
+```
+
+### Using pnpm directly
 
 ```bash
 # Run all tests

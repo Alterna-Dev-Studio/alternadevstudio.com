@@ -2,14 +2,38 @@
 layout: base.njk
 title: Alterna Development Studio
 ---
-<h1>Alterna Development Studio</h1>
-<p>Making the world a better place one product at a time.</p>
+<main class="container mx-auto p-6">
+    <section class="bg-white rounded-lg shadow-md p-8 mb-8">
+      <h2 class="text-2xl font-bold text-primary mb-4">Welcome</h2>
+      <p class="text-lg mb-6">Making the world a better place one product at a time.</p>
+      <a href="/about/" class="bg-accent hover:bg-accent/90 text-white font-bold py-2 px-4 rounded transition-colors">
+        Learn More
+      </a>
+    </section>
 
-<nav>
-  <ul>
-    <li><a href="/about/">About</a></li>
-    <li><a href="/blog/">Blog</a></li>
-    <li><a href="/projects/">Projects</a></li>
-    <li><a href="/streams/">Stream Recaps</a></li>
-  </ul>
-</nav>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div class="bg-white rounded-lg shadow-md p-6">
+        <h3 class="text-xl font-bold text-primary mb-2">Projects</h3>
+        <p class="mb-4">Check out our latest projects and case studies.</p>
+        <a href="/projects/" class="text-secondary hover:text-accent">View Projects →</a>
+      </div>
+      
+      <div class="bg-white rounded-lg shadow-md p-6">
+        <h3 class="text-xl font-bold text-primary mb-2">Blog</h3>
+        <p class="mb-4">Read our latest articles and insights.</p>
+        <a href="/blog/" class="text-secondary hover:text-accent">Read Blog →</a>
+      </div>
+      
+      <div class="bg-white rounded-lg shadow-md p-6">
+        <h3 class="text-xl font-bold text-primary mb-2">Live Streams</h3>
+        <p class="mb-4">Watch our product development streams and recaps.</p>
+        <a href="/streams/" class="text-secondary hover:text-accent">View Streams →</a>
+      </div>
+      
+      <div class="bg-white rounded-lg shadow-md p-6">
+        <h3 class="text-xl font-bold text-primary mb-2">Scale Your Product</h3>
+        <p class="mb-4">Ready to take your AI-built product to the next level?</p>
+        <a href="/refactoring/" class="text-secondary hover:text-accent">Learn More →</a>
+      </div>
+    </div>
+</main>

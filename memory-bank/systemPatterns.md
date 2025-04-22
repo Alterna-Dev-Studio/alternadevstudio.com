@@ -24,7 +24,6 @@ The site uses Eleventy (11ty) as its static site generator with the following co
 - **Templating Engine**: Nunjucks (`.njk`)
 - **Data Directory**: `src/_data/`
 - **Layouts Directory**: `src/_layouts/`
-- **Includes Directory**: `src/_includes/`
 
 ### 2. Content Management (Directus)
 

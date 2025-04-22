@@ -115,6 +115,17 @@ Footer:
 - Validate contact form functionality
 - Confirm blog, project, and stream content renders properly
 
+### Accessibility Testing
+- Test against WCAG 2.1 AA compliance standards
+- Verify proper semantic HTML usage throughout the site
+- Check color contrast ratios for all text and UI elements
+- Test keyboard navigation functionality
+- Validate form accessibility including labels and error states
+- Test with screen readers (NVDA, VoiceOver)
+- Test with color blindness simulators for different types (protanopia, deuteranopia, tritanopia)
+- Evaluate typography and layouts for dyslexia-friendly reading experience
+- Use Eleventy accessibility plugin for automated checks
+
 ### Streaming Integration Testing
 - Test Twitch embed toggle behavior
 - Validate floating CTA appears only when streaming

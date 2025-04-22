@@ -25,6 +25,7 @@ AlternaDevStudio.com is a modern, responsive brochure-style website for "Alterna
 - **Responsive Design**: Ensure the site works well on all devices (desktop, tablet, mobile)
 - **Content-First Approach**: Prioritize showcasing the studio's work and knowledge
 - **Streamlined Contact**: Make it simple for potential clients to request consultations
+- **Accessibility**: Ensure the site follows WCAG 2.1 AA standards to make content accessible to a wider audience, including those with disabilities
 
 ## Content Strategy
 
@@ -58,3 +59,18 @@ This approach provides:
 - Easy content management
 - Secure, scalable hosting
 - Privacy-focused analytics
+
+
+## Design Style Guidlines
+A full logo and icon logos have been added to the src/_assets folder.
+
+Here are some color style guidelines for a matching color scheme:
+
+### 🎨 Color Palette
+
+| Name          | Hex       | RGB             | Tailwind Name  | Suggested Usage                    |
+|---------------|-----------|------------------|----------------|------------------------------------|
+| Primary       | `#064672` | `rgb(6, 70, 114)` | `primary`      | Headers, nav, footer, buttons      |
+| Secondary     | `#1C89D8` | `rgb(28, 137, 216)` | `secondary`    | Icons, links, backgrounds, hover   |
+| Accent 1      | `#D8701C` | `rgb(216, 112, 28)` | `accent`       | CTA buttons, highlights, links     |
+| Accent 2      | `#A67C00` | `rgb(166, 124, 0)`  | `highlight`    | Labels, badges, subtle callouts    |

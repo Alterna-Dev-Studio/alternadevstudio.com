@@ -11,6 +11,7 @@ This document tracks the progress of the AlternaDevStudio.com website developmen
 - **Dependency Installation**: Core dependencies are installed
 - **Eleventy Configuration**: eleventy.config.js is set up with proper directories and templating engines
 - **Basic Project Structure**: Directory structure follows 11ty conventions
+- **Development Workflow**: Streamlined Makefile with essential targets (dev, shutdown, reset, build, clean, test)
 
 ### ✅ Directus CMS Integration
 
@@ -53,13 +54,28 @@ This document tracks the progress of the AlternaDevStudio.com website developmen
 
 ## What's Left to Build
 
-### 📋 Styling & Design
+### ✅ Styling & Design
 
-- **CSS Framework Decision**: Choose between Tailwind or custom CSS
-- **Global Styles**: Implement global styles for typography, colors, spacing
-- **Component Styles**: Style individual components (header, footer, cards, etc.)
-- **Responsive Breakpoints**: Define and implement responsive breakpoints
-- **Dark/Light Mode**: Implement theme switching if desired
+- **CSS Framework Decision**: Tailwind CSS has been implemented
+- **Global Styles**: Implemented global styles using Tailwind utility classes
+- **Custom Colors**: Custom color palette defined in tailwind.config.js and CSS variables
+- **Component Styles**: Basic styling for components using Tailwind utility classes
+- **Responsive Breakpoints**: Implemented responsive design using Tailwind's responsive utilities
+- **Dark/Light Mode**: Not implemented yet (optional feature)
+
+### 📋 Accessibility
+
+- **WCAG Compliance**: Implement WCAG 2.1 AA standards across the site
+- **Semantic HTML**: Use proper semantic HTML elements throughout templates
+- **Color Contrast**: Ensure sufficient contrast for text and UI elements
+- **ARIA Attributes**: Add appropriate ARIA attributes where necessary
+- **Keyboard Navigation**: Implement keyboard navigation support
+- **Form Accessibility**: Ensure all form inputs have proper labels and error states
+- **Skip Links**: Add skip navigation links for keyboard users
+- **Screen Reader Testing**: Test with screen readers like NVDA and VoiceOver
+- **Dyslexia-Friendly Design**: Implement typography and layouts that support users with dyslexia
+- **Color Blindness Accommodations**: Ensure color schemes work for people with different types of color blindness
+- **Eleventy Accessibility Plugin**: Research and implement plugin for automated accessibility checks
 
 ### 📋 Projects Section
 
@@ -100,7 +116,7 @@ This document tracks the progress of the AlternaDevStudio.com website developmen
 
 ## Current Status
 
-As of April 14, 2025, the project is in the early development phase. The foundation is in place with the Directus CMS integration and basic site structure, but most of the user-facing features are still to be implemented.
+As of April 14, 2025, the project is in the early development phase. The foundation is in place with the Directus CMS integration and basic site structure, but most of the user-facing features are still to be implemented. The development workflow has been improved with the addition of a streamlined Makefile that provides essential targets for managing the development environment (dev, shutdown, reset, build, clean, test).
 
 ### Completed Tasks (from todo.md)
 
@@ -121,12 +137,13 @@ As of April 14, 2025, the project is in the early development phase. The foundat
 - [x] Store token in `.env`.
 - [x] Create `_data/directus.js` for fetching data.
 - [x] Implement error handling with fallback to sample data.
-- [x] Create `src/_includes/layouts/base.njk`.
+- [x] Create `src/_layouts/base.njk`.
 - [x] Configure Jest for testing.
 - [x] Create test setup and teardown scripts.
 - [x] Implement utility functions for testing.
 - [x] Create SDK-based tests for Directus connection.
 - [x] Test collection existence and accessibility.
+- [x] Create streamlined Makefile with essential targets (dev, shutdown, reset, build, clean, test).
 
 ### Next Tasks to Complete
 

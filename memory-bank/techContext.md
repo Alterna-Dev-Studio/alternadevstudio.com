@@ -8,7 +8,9 @@ AlternaDevStudio.com uses a modern JAMstack architecture with the following core
 
 - **Static Site Generator**: [11ty (Eleventy)](https://www.11ty.dev/) v3.0.0
 - **Templating Engine**: [Nunjucks](https://mozilla.github.io/nunjucks/) v3.2.4
-- **CSS**: Custom CSS (no framework currently implemented)
+- **CSS Framework**: [Tailwind CSS](https://tailwindcss.com/) v4.1.4
+- **CSS Processing**: [PostCSS](https://postcss.org/) v8.5.3 with [Autoprefixer](https://github.com/postcss/autoprefixer) v10.4.21
+- **Accessibility**: Planning to implement WCAG 2.1 AA standards and integrate an Eleventy accessibility plugin
 
 ### Content Management
 
@@ -93,7 +95,6 @@ The project follows a standard 11ty structure with some additions for Directus i
 │   │   ├── stream_recaps.js # Fetches stream recaps from Directus
 │   │   └── utils/        # Utility functions
 │   │       └── directus.js # Directus connection utilities
-│   ├── _includes/        # Reusable components
 │   ├── _layouts/         # Layout templates
 │   │   └── base.njk      # Base layout
 │   ├── about.html        # About page
