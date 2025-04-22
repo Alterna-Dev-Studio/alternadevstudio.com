@@ -303,7 +303,7 @@ export async function fetchStreamRecaps() {
   }
   
   // Fetch stream recaps from Directus
-  const streamRecaps = await fetchFromDirectus(client, 'stream_recap', { sort: ['-stream_date'] });
+  const streamRecaps = await fetchFromDirectus(client, 'stream_recaps', { sort: ['-stream_date'] });
   
   // If fetch failed, use sample data
   if (!streamRecaps) {
