@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "clean": "rm -rf _site && mkdir -p _site",
-    "build:css": "postcss src/_assets/css/main.css -o _site/css/main.css",
+    "build:css": "pnpm exec postcss src/_assets/css/main.css -o _site/css/main.css --config postcss.config.js",
     "build": "pnpm clean && pnpm build:css && pnpm exec eleventy",
     "build-nocolor": "cross-env NODE_DISABLE_COLORS=1 pnpm exec eleventy",
     "build-ghpages": "pnpm exec eleventy --pathprefix=/eleventy-base-blog/",
