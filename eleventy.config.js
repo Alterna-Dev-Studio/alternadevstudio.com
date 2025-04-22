@@ -17,6 +17,9 @@ export default function(eleventyConfig) {
   // Set Nunjucks as the default template engine for HTML and Nunjucks files
   eleventyConfig.setTemplateFormats(["html", "njk", "md"]);
   
+  // Add CSS files to the list of pass-through copy assets
+  eleventyConfig.addPassthroughCopy("src/css");
+  
   // Configure Nunjucks as the library for both HTML and Nunjucks files
   eleventyConfig.setLibrary("html", eleventyConfig.nunjucksLibrary);
   eleventyConfig.setLibrary("njk", eleventyConfig.nunjucksLibrary);
