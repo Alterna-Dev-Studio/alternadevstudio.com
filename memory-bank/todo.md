@@ -296,9 +296,35 @@ Below is a **detailed, actionable** checklist with micro-level tasks for each ph
 - [ ] Implement component testing for UI elements.
 - [ ] Add end-to-end tests for critical user flows.
 
-## 13. **Refactoring and Optimization**
+## 13. **Accessibility Implementation**
 
-### 13.1 Script Consolidation
+### 13.1 WCAG Compliance
+- [ ] Audit site for WCAG 2.1 AA compliance
+- [ ] Implement proper semantic HTML throughout all templates
+- [ ] Ensure sufficient color contrast ratios for all text and UI elements
+- [ ] Add appropriate ARIA attributes where necessary
+- [ ] Implement keyboard navigation support
+- [ ] Ensure all form inputs have proper labels and error states
+- [ ] Add skip navigation links for keyboard users
+- [ ] Test with screen readers (NVDA, VoiceOver)
+- [ ] Implement dyslexia-friendly typography and layouts
+  - [ ] Research best practices for dyslexia-friendly text (font choice, spacing, alignment)
+  - [ ] Create alternative stylesheet option with dyslexia-friendly settings
+  - [ ] Test with users who have dyslexia if possible
+- [ ] Ensure color schemes are accessible to people with color blindness
+  - [ ] Test site with color blindness simulators (protanopia, deuteranopia, tritanopia)
+  - [ ] Avoid relying on color alone to convey information
+  - [ ] Add patterns or icons to differentiate where color alone isn't sufficient
+
+### 13.2 Eleventy Accessibility Plugin
+- [ ] Research and implement an Eleventy accessibility plugin
+- [ ] Configure plugin to check for common accessibility issues
+- [ ] Set up automated accessibility testing in the build process
+- [ ] Document accessibility standards and practices in project README
+
+## 14. **Refactoring and Optimization**
+
+### 14.1 Script Consolidation
 - [x] Incorporate Minio setup directly into the calling scripts.
 - [x] Remove unnecessary configuration options from Minio setup.
 - [x] Eliminate separate Minio setup scripts.

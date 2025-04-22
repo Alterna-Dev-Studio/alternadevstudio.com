@@ -42,6 +42,7 @@ Based on the todo.md file, the following tasks are next in the pipeline:
 4. **Implement the Blog section**: Create the blog listing page and individual blog post pages.
 5. **Build the Live Product Development page**: Implement Twitch and YouTube integrations.
 6. **Create the Contact page**: Implement the consultation request form.
+7. **Implement accessibility standards**: Ensure the site follows WCAG 2.1 AA standards and research an Eleventy accessibility plugin to automate accessibility checks.
 
 ## Active Decisions and Considerations
 
@@ -113,3 +114,4 @@ The project is configured to interact with an external Directus instance (self-h
 2. **Content Rendering**: A solution is needed for rendering rich text content from Directus.
 3. **Streaming Integration**: The integration with Twitch and YouTube needs to be implemented.
 4. **Form Handling**: The contact form needs to be implemented with validation and submission handling.
+5. **Accessibility Compliance**: Ensuring the site meets WCAG 2.1 AA standards for accessibility, including keyboard navigation, screen reader compatibility, sufficient color contrast, dyslexia-friendly typography and layouts, and color-blind friendly color schemes.

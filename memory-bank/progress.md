@@ -63,6 +63,20 @@ This document tracks the progress of the AlternaDevStudio.com website developmen
 - **Responsive Breakpoints**: Implemented responsive design using Tailwind's responsive utilities
 - **Dark/Light Mode**: Not implemented yet (optional feature)
 
+### 📋 Accessibility
+
+- **WCAG Compliance**: Implement WCAG 2.1 AA standards across the site
+- **Semantic HTML**: Use proper semantic HTML elements throughout templates
+- **Color Contrast**: Ensure sufficient contrast for text and UI elements
+- **ARIA Attributes**: Add appropriate ARIA attributes where necessary
+- **Keyboard Navigation**: Implement keyboard navigation support
+- **Form Accessibility**: Ensure all form inputs have proper labels and error states
+- **Skip Links**: Add skip navigation links for keyboard users
+- **Screen Reader Testing**: Test with screen readers like NVDA and VoiceOver
+- **Dyslexia-Friendly Design**: Implement typography and layouts that support users with dyslexia
+- **Color Blindness Accommodations**: Ensure color schemes work for people with different types of color blindness
+- **Eleventy Accessibility Plugin**: Research and implement plugin for automated accessibility checks
+
 ### 📋 Projects Section
 
 - **Projects Listing Page**: Create page to display all projects

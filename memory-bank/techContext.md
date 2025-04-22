@@ -10,6 +10,7 @@ AlternaDevStudio.com uses a modern JAMstack architecture with the following core
 - **Templating Engine**: [Nunjucks](https://mozilla.github.io/nunjucks/) v3.2.4
 - **CSS Framework**: [Tailwind CSS](https://tailwindcss.com/) v4.1.4
 - **CSS Processing**: [PostCSS](https://postcss.org/) v8.5.3 with [Autoprefixer](https://github.com/postcss/autoprefixer) v10.4.21
+- **Accessibility**: Planning to implement WCAG 2.1 AA standards and integrate an Eleventy accessibility plugin
 
 ### Content Management
 
