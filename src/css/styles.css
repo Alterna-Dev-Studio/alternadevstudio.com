@@ -98,9 +98,15 @@ header {
 }
 
 .site-logo {
-  font-size: 1.5rem;
-  font-weight: bold;
+  display: flex;
+  align-items: center;
   color: var(--text-light);
+}
+
+.site-logo img {
+  max-width: 100%;
+  height: auto;
+  display: block;
 }
 
 nav ul {
@@ -141,6 +147,17 @@ footer {
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+.footer-brand {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.footer-logo {
+  width: 40px;
+  height: 40px;
 }
 
 .social-links {
@@ -253,6 +270,11 @@ footer {
     flex-direction: column;
     gap: 1rem;
     text-align: center;
+  }
+  
+  .footer-brand {
+    flex-direction: column;
+    align-items: center;
   }
   
   .menu-toggle {
